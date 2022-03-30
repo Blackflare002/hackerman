@@ -15,10 +15,10 @@ const getCompanies = async (req, res) => {
     await client.connect();
     const db = client.db("ecommerce_db");
     console.log("connected!");
-    const compagnies = await db.collection("companies").find().toArray();
+    const companies = await db.collection("companies").find().toArray();
 
-    if (compagnies.length > 0) {
-      res.status(200).json({ status: 200, compagnies });
+    if (companies.length > 0) {
+      res.status(200).json({ status: 200, companies, message: "success" });
     } else {
       res.status(404).json({ status: 404, messsage: "not found" });
     }
@@ -40,7 +40,9 @@ const getACompaniesId = async (req, res) => {
       .collection("companies")
       .findOne({ _id: Number(_id) });
     if (singleCompanies) {
-      res.status(200).json({ status: 200, singleCompanies });
+      res
+        .status(200)
+        .json({ status: 200, singleCompanies, message: "success" });
     } else {
       res.status(404).json({ status: 404, messsage: "not found" });
     }
@@ -59,7 +61,7 @@ const getItems = async (req, res) => {
     console.log("connected!");
     const items = await db.collection("items").find().toArray();
     if (items.length > 0) {
-      res.status(200).json({ status: 200, items });
+      res.status(200).json({ status: 200, items, message: "success" });
     } else {
       res.status(404).json({ status: 404, messsage: "not found" });
     }
@@ -82,7 +84,7 @@ const getSingleItem = async (req, res) => {
       .collection("items")
       .findOne({ _id: Number(_id) });
     if (singleItem) {
-      res.status(200).json({ status: 200, singleItem });
+      res.status(200).json({ status: 200, singleItem, message: "success" });
     } else {
       res.status(404).json({ status: 404, messsage: "not found" });
     }
