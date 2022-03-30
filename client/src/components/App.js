@@ -1,7 +1,16 @@
-import { useState, useEffect } from "react";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
+import Homepage from "./Homepage";
 
 function App() {
-  return <div>`...who moved my cheese...</div>;
+  return (
+    <BrowserRouter>
+      <Switch>
+        <Route exact path="/">
+          <Homepage />
+        </Route>
+      </Switch>
+    </BrowserRouter>
+  );
 }
 
 export default App;
