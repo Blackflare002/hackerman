@@ -6,8 +6,10 @@ const initialState = {
   status: "idle",
   error: null,
   items: null,
-  cartItems: [],
-  cartTotal: 0,
+  cart: {
+    items: [],
+    totalCost: 0
+  },
 };
 
 const reducer = (action, state) => {
