@@ -7,7 +7,7 @@ const Cart = () => {
   const {
     cart,
     cart: { items, size, totalCost },
-    actions: { removeItemFromCart },
+    actions: { removeItemFromCart, setStatusError },
   } = useContext(AppContext);
 
   const handleRemoveFromCart = (_id) => {
@@ -15,7 +15,19 @@ const Cart = () => {
   };
 
   const handleConfirmPurchase = () => {
-    
+    fetch(`/cart/update-stock`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ cart: items }),
+    })
+      .then((res) => res.json())
+      .then((data) => console.log(data))
+      .catch((err) => {
+        console.log(err);
+        setStatusError(err);
+      });
   };
 
   return (
