@@ -15,47 +15,62 @@ const initialState = {
 
 const reducer = (state, action) => {
   switch (action.type) {
-    case "set-status-loading":
+    case "set-status-loading": {
       return {
         ...state,
         status: "loading",
       };
-    case "set-status-idle":
+    }
+
+    case "set-status-idle": {
       return {
         ...state,
         status: "idle",
       };
-    case "set-status-error":
+    }
+
+    case "set-status-error": {
       return {
         ...state,
         error: action.error,
         status: "error",
       };
-    case "get-items":
+    }
+
+    case "get-items": {
       return {
         ...state,
         items: action.items,
       };
-    case "add-item-to-cart":
+    }
+
+    case "add-item-to-cart": {
       const { cart } = state;
       const { item } = action;
       //totalCost is stored as a string, needs to be converted to a number for summing
       const updatedTotalCost =
         Number(cart.totalCost) + Number(item.price.slice(1)); // add price to total
 
+      // build new cart object to both set new state AND sessionStorage
+      const updatedCart = {
+        ...cart,
+        items: [
+          ...cart.items,
+          item, // add item to items array in cart
+        ],
+        totalCost: updatedTotalCost.toFixed(2), // .toFixed() returns a string
+        size: cart.size + 1, // increment cart size by 1}
+      };
+
+      sessionStorage.setItem("forkinators_cart", JSON.stringify(updatedCart));
+
       return {
         ...state,
-        cart: {
-          ...cart,
-          items: [
-            ...cart.items,
-            item, // add item to items array in cart
-          ],
-          totalCost: updatedTotalCost.toFixed(2), // .toFixed() returns a string
-          size: cart.size + 1, // increment cart size by 1
-        },
+        cart: updatedCart,
       };
-    case "remove-item-from-cart":
+    }
+
+    case "remove-item-from-cart": {
       const { items } = state.cart;
 
       // remove one item of id provided
@@ -69,15 +84,37 @@ const reducer = (state, action) => {
         updatedTotal = updatedTotal - Number(items[foundIndex].price.slice(1));
       }
 
+      // build new cart object to both set new state AND sessionStorage
+      const updatedCart = {
+        ...state.cart,
+        items: updatedItems,
+        totalCost: updatedTotal.toFixed(2), // .toFixed() returns a string
+        size: state.cart.size - 1,
+      };
+
+      sessionStorage.setItem("forkinators_cart", JSON.stringify(updatedCart));
+
       return {
         ...state,
-        cart: {
-          ...state.cart,
-          items: updatedItems,
-          totalCost: updatedTotal.toFixed(2), // .toFixed() returns a string
-          size: state.cart.size - 1,
-        },
+        cart: updatedCart,
       };
+    }
+
+    // restore cart from session storage if it exists
+    case "restore-cart-session": {
+      const sessionCart = JSON.parse(
+        sessionStorage.getItem("forkinators_cart")
+      );
+      console.log(sessionCart);
+
+      const newState = {
+        ...state,
+      };
+
+      if (sessionCart) newState.cart = sessionCart;
+
+      return newState;
+    }
     default:
   }
 };
@@ -90,8 +127,19 @@ export const AppContextProvider = ({ children }) => {
     [dispatch]
   );
 
+  const getItems = useCallback(
+    (items) => dispatch({ type: "get-items", items }),
+    [dispatch]
+  );
+
   const removeItemFromCart = useCallback(
     (_id) => dispatch({ type: "remove-item-from-cart", _id }),
+    [dispatch]
+  );
+
+  // if cart exists in sessionStorage, set current cart state equal to it
+  const restoreCartSession = useCallback(
+    () => dispatch({ type: "restore-cart-session" }),
     [dispatch]
   );
 
@@ -110,11 +158,6 @@ export const AppContextProvider = ({ children }) => {
     [dispatch]
   );
 
-  const getItems = useCallback(
-    (items) => dispatch({ type: "get-items", items }),
-    [dispatch]
-  );
-
   // fetch items from db on load
   useEffect(() => {
     setStatusLoading();
@@ -127,6 +170,11 @@ export const AppContextProvider = ({ children }) => {
       .catch((err) => setStatusError(err));
   }, []);
 
+  // use cart in sessionStorage on load if it exists
+  useEffect(() => {
+    restoreCartSession();
+  }, []);
+
   return (
     <AppContext.Provider
       value={{
@@ -135,6 +183,7 @@ export const AppContextProvider = ({ children }) => {
           addItemToCart,
           getItems,
           removeItemFromCart,
+          restoreCartSession,
           setStatusError,
           setStatusLoading,
           setStatusIdle,
