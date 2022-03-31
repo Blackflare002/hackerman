@@ -84,8 +84,9 @@ export const AppContextProvider = ({ children }) => {
     [dispatch]
   );
 
-  const removeItemFromCart = useCallback((_id) =>
-    dispatch({ type: "remove-item-from-cart", _id })
+  const removeItemFromCart = useCallback(
+    (_id) => dispatch({ type: "remove-item-from-cart", _id }),
+    [dispatch]
   );
 
   const setStatusIdle = useCallback(
@@ -98,12 +99,14 @@ export const AppContextProvider = ({ children }) => {
     [dispatch]
   );
 
-  const setStatusError = useCallback((error) =>
-    dispatch({ type: "set-status-error", error }, [dispatch])
+  const setStatusError = useCallback(
+    (error) => dispatch({ type: "set-status-error", error }),
+    [dispatch]
   );
 
-  const getItems = useCallback((items) =>
-    dispatch({ type: "get-items", items }, [dispatch])
+  const getItems = useCallback(
+    (items) => dispatch({ type: "get-items", items }),
+    [dispatch]
   );
 
   // fetch items from db on load
