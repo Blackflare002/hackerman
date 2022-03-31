@@ -1,6 +1,6 @@
 import { createGlobalStyle } from "styled-components";
 
-//Exporting colors.
+// exporting colors
 export const colors = {
 
     headerBackground: "whitesmoke",
@@ -12,11 +12,11 @@ export const colors = {
     fontSecondary: "gray",
 };
 
-//Exporting font.
+// exporting font
 export const fontFamily = "sans-serif";
 
 
-//Style reset.
+// style reset
 export default createGlobalStyle`
     *,
     *:before,
