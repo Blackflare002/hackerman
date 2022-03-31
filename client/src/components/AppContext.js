@@ -1,6 +1,6 @@
-import { createConText, useCallback, useEffect, useReducer } from "react";
+import { createContext, useCallback, useEffect, useReducer } from "react";
 
-export const AppContext = createConText();
+export const AppContext = createContext();
 
 const initialState = {
   status: "idle",
@@ -13,7 +13,7 @@ const initialState = {
   },
 };
 
-const reducer = (action, state) => {
+const reducer = (state, action) => {
   switch (action.type) {
     case "set-status-loading":
       return {
@@ -45,7 +45,7 @@ const reducer = (action, state) => {
             ...state.cart.items,
             action.item, // add item to items array in cart
           ],
-          totalCost: state.cart.totalCost + Number(item.cost.slice(1)), // add price to total
+          totalCost: state.cart.totalCost + Number(action.item.cost.slice(1)), // add price to total
           size: state.cart.size + 1, // increment cart size by 1
         },
       };
