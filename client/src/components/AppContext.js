@@ -5,11 +5,11 @@ export const AppContext = createConText();
 const initialState = {
   status: "idle",
   error: null,
-  items: null,
+  items: null, // all items pulled from DB
   cart: {
     items: [],
-    totalCost: 0,
-    size: 0,
+    totalCost: 0, // totalCost updates as items array updates
+    size: 0, // size updates as items as items array updates
   },
 };
 
