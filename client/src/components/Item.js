@@ -62,14 +62,13 @@ const Item = () => {
                 <CompanyInfo>        
                   <CompanyName>{companyData.name}</CompanyName>
                   <Country>{companyData.country}</Country>
-                  <CompanyLink to={companyData.url}>{companyData.url}</CompanyLink>
+                  <CompanyLink to={companyData.url}>Visit : {companyData.url}</CompanyLink>
                 </CompanyInfo>
                 <Cartbutton>
                   <button onClick={handleAddToCart}>ADD TO CART</button>
                 </Cartbutton>
               </CompanyInfoWrapper>
             </ItemInfo>
-
         </>
       )}
     </Wrapper>
@@ -89,8 +88,6 @@ const Wrapper = styled.div`
   
 `
 
-
-
 const ItemImage = styled.div`
   
   display: flex;
@@ -101,14 +98,11 @@ const ItemImage = styled.div`
 const Image = styled.img`
   
   
-  
-
 
 `
 
 const ItemInfo = styled.div`
 
-  
   width: 75%;
 
 `
@@ -117,7 +111,6 @@ const ItemDescription = styled.div`
 
   display: grid;
   grid-template-columns: auto auto;
-  
   
 
 `
