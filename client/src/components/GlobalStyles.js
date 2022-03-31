@@ -14,7 +14,6 @@ export const colors = {
 // exporting font
 export const fontFamily = "sans-serif";
 
-
 // style reset
 export default createGlobalStyle`
     *,
@@ -24,17 +23,23 @@ export default createGlobalStyle`
         -webkit-font-smoothing: antialiased;
     }
 
+    :root {
+--realDarkGrey: #424245
+    }
+
     html, body, div,
     input, button, select, option,
     h1, h2, h3, h4, h5, h6, p,
     text {
         
         font-family: sans-serif;
+        color: white;
     }
 
     html, body {
         
         max-width: 100vw;
+        background-color: black;
     }
 
     /* http://meyerweb.com/eric/tools/css/reset/
