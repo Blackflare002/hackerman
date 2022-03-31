@@ -82,7 +82,8 @@ const reducer = (state, action) => {
       };
     }
 
-    case "remove-item-from-cart": { // remove one item of provided id
+    case "remove-item-from-cart": {
+      // remove one item of provided id
       const { items } = state.cart;
 
       const foundIndex = items.findIndex((item) => item._id === action._id);
