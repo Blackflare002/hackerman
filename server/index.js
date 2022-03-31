@@ -9,6 +9,7 @@ const {
   getItems,
   getSingleItem,
   getACompaniesId,
+  updateItemStock,
 } = require("./handlers");
 
 express()
@@ -34,5 +35,6 @@ express()
   .get("/companies/:_id", getACompaniesId)
   .get("/items", getItems)
   .get("/items/:_id", getSingleItem)
+  .patch("/cart/update-stock", updateItemStock)
 
   .listen(PORT, () => console.info(`Listening on port ${PORT}`));
