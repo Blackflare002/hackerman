@@ -41,9 +41,8 @@ const Item = () => {
     <Wrapper>
       {itemData && companyData && (
         <>
-        
           <ItemImage>
-            <img src={itemData.imageSrc} />
+            <Image src={itemData.imageSrc} />
             </ItemImage>
             <ItemInfo>
               <ItemDescription>
@@ -51,15 +50,14 @@ const Item = () => {
                 <Category>{itemData.category}</Category>                
                 <BodyLocation>{itemData.body_location}</BodyLocation>                
               </ItemDescription>
-              <SomeWrapper>
+              <PurchaseSection>
                 <ItemAvailability>
                   <Stock>{`Stock: ${itemData.numInStock}`}</Stock>
                 </ItemAvailability>
                 <ItemPrice>
                   <Price>{itemData.price}</Price>
-                </ItemPrice>              
-                
-              </SomeWrapper>
+                </ItemPrice>                
+              </PurchaseSection>
               <CompanyInfoWrapper>
                 <CompanyInfo>        
                   <CompanyName>{companyData.name}</CompanyName>
@@ -70,7 +68,8 @@ const Item = () => {
                   <button onClick={handleAddToCart}>ADD TO CART</button>
                 </Cartbutton>
               </CompanyInfoWrapper>
-            </ItemInfo>          
+            </ItemInfo>
+
         </>
       )}
     </Wrapper>
@@ -80,18 +79,31 @@ const Item = () => {
 export default Item;
 
 const Wrapper = styled.div`
-
+  
   display: flex;
   flex-direction: row;
   justify-content: center;
   width: 100%;
+  height: 100vh;
   background-color: ${colors.itemsBackground};
+  
 `
-const ItemImage = styled.div`
 
+
+
+const ItemImage = styled.div`
+  
   display: flex;
   justify-content: center;
-  width: 50%;
+  width: 25%;
+  height: 25%;
+`
+const Image = styled.img`
+  
+  
+  
+
+
 `
 
 const ItemInfo = styled.div`
@@ -112,28 +124,33 @@ const ItemDescription = styled.div`
 const ItemName = styled.p`
   margin: 0px;
   font-family: ${fontFamily};
-
+  
+  
 `
 
 const Category = styled.p`
   margin: 0px;
   font-family: ${fontFamily};
+  
 `
 const BodyLocation = styled.p`
   margin: 0px;
   font-family: ${fontFamily};
+  
 
 `
 const Stock = styled.p`
   margin: 0px;
   font-family: ${fontFamily};
+  
 `
 const Price = styled.p`
   margin: 0px;
   font-family: ${fontFamily};
+  
 `
 
-const SomeWrapper = styled.div`
+const PurchaseSection = styled.div`
   display: grid;
   grid-template-columns: auto auto auto;  
   align-items: center;

@@ -7,7 +7,6 @@ export const colors = {
     homepageBackground: "whitesmoke",
     itemsBackground: "whitesmoke",
     cartBackground: "whitesmoke",
-
     fontPrimary: "black",
     fontSecondary: "gray",
 };
@@ -29,10 +28,12 @@ export default createGlobalStyle`
     input, button, select, option,
     h1, h2, h3, h4, h5, h6, p,
     text {
+        
         font-family: sans-serif;
     }
 
     html, body {
+        
         max-width: 100vw;
     }
 
