@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { AppContext } from "./AppContext";
+import { RiShoppingCartLine } from "react-icons/ri";
 
 const Header = () => {
   const {
@@ -10,29 +11,44 @@ const Header = () => {
 
   return (
     <Wrapper>
-      <Link to={`/`}>
+      <StyledLink to={`/`}>
         <h3>Header</h3>
-      </Link>
+      </StyledLink>
       <div>
-        <Link to={`/cart`}>
-          <h3>Shopping Cart</h3>
-        </Link>
-        <p>{size} items in cart</p>
-        <p>
-          Total: $
-          {totalCost}
-        </p>
+        <StyledLink to={`/cart`}>
+          <CartBox>
+            <span>{size}</span>
+            <RiShoppingCartLine />
+            <span>Cart</span>
+          </CartBox>
+        </StyledLink>
+        {/* <p>{size} items in cart</p> */}
+        {/* <p>Total: ${totalCost}</p> */}
       </div>
     </Wrapper>
   );
 };
 
+const CartBox = styled.div`
+  display: flex;
+  gap: 8px;
+  font-size: large;
+  padding: 10px;
+  border: solid 1px black;
+`;
+
+const StyledLink = styled(Link)`
+  text-decoration: none;
+`;
+
 const Wrapper = styled.header`
   display: flex;
   justify-content: space-between;
+  align-items: center;
   height: fit-content;
-  padding: 10px;
-  border: solid 2px black;
+  padding: 10px 15px;
+  margin-bottom: 20px;
+  border: solid 1px black;
 `;
 
 export default Header;
