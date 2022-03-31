@@ -5,7 +5,7 @@ import { AppContext } from "./AppContext";
 import ListItem from "./ListItem";
 
 const Homepage = () => {
-  const { items } = useContext(AppContext);
+  const { items, addItemToCart } = useContext(AppContext);
   //
   return (
     <div>
