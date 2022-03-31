@@ -37,16 +37,22 @@ const reducer = (state, action) => {
         items: action.items,
       };
     case "add-item-to-cart":
+      const { cart } = state;
+      const { item } = action;
+      //totalCost is stored as a string, needs to be converted to a number for summing
+      const updatedTotalCost =
+        Number(cart.totalCost) + Number(item.price.slice(1)); // add price to total
+
       return {
         ...state,
         cart: {
-          ...state.cart,
+          ...cart,
           items: [
-            ...state.cart.items,
-            action.item, // add item to items array in cart
+            ...cart.items,
+            item, // add item to items array in cart
           ],
-          totalCost: state.cart.totalCost + Number(action.item.cost.slice(1)), // add price to total
-          size: state.cart.size + 1, // increment cart size by 1
+          totalCost: updatedTotalCost.toFixed(2), // .toFixed() returns a string
+          size: cart.size + 1, // increment cart size by 1
         },
       };
     case "remove-item-from-cart":
@@ -55,12 +61,12 @@ const reducer = (state, action) => {
       // remove one item of id provided
       const foundIndex = items.findIndex((item) => item._id === action._id);
       const updatedItems = [...items];
-      let priceToDeduct = 0;
+      let updatedTotal = Number(state.cart.totalCost);
       // only remove item if provided item id is found inside cart
       if (foundIndex !== -1) {
         updatedItems.splice(foundIndex, 1);
         // if item is found, find the price to deduct from totalCost
-        priceToDeduct = Number(items[foundIndex].price.slice(1));
+        updatedTotal = updatedTotal - Number(items[foundIndex].price.slice(1));
       }
 
       return {
@@ -68,7 +74,7 @@ const reducer = (state, action) => {
         cart: {
           ...state.cart,
           items: updatedItems,
-          totalCost: state.cart.totalCost - priceToDeduct,
+          totalCost: updatedTotal.toFixed(2), // .toFixed() returns a string
           size: state.cart.size - 1,
         },
       };
