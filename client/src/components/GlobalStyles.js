@@ -2,19 +2,17 @@ import { createGlobalStyle } from "styled-components";
 
 // exporting colors
 export const colors = {
+  headerBackground: "whitesmoke",
+  homepageBackground: "whitesmoke",
+  itemsBackground: "whitesmoke",
+  cartBackground: "whitesmoke",
 
-    headerBackground: "whitesmoke",
-    homepageBackground: "whitesmoke",
-    itemsBackground: "whitesmoke",
-    cartBackground: "whitesmoke",
-
-    fontPrimary: "black",
-    fontSecondary: "gray",
+  fontPrimary: "black",
+  fontSecondary: "gray",
 };
 
 // exporting font
 export const fontFamily = "sans-serif";
-
 
 // style reset
 export default createGlobalStyle`
@@ -29,6 +27,8 @@ export default createGlobalStyle`
     input, button, select, option,
     h1, h2, h3, h4, h5, h6, p,
     text {
+        /* @import url("client/src/Tron-JOAa.ttf");
+        font-family: "Tron-JoAa", sans-serif; */
         font-family: sans-serif;
     }
 

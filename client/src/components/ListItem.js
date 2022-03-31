@@ -20,7 +20,7 @@ const ListItem = ({ item }) => {
 };
 
 const StyledItemPrice = styled.p`
-  font-size: larger;
+  font-size: large;
 `;
 
 const StyledItemName = styled.p`
@@ -33,6 +33,7 @@ const ItemInnerBox = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 20px;
 `;
 
 const ItemContainer = styled.div`
