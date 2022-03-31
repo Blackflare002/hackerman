@@ -115,13 +115,28 @@ const reducer = (state, action) => {
 
       return newState;
     }
+
+    case "update-single-item": {
+      const { items } = state;
+      const indexToUpdate = items.findIndex(item => item._id === action.item._id);
+      const updatedItems = [...items];
+
+      updatedItems[indexToUpdate] = action.item; // replace item with provided item
+
+      return {
+        ...state,
+        items: updatedItems
+      }
+    }
     default:
   }
+
 };
 
 export const AppContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
+  // add item object to cart.items array
   const addItemToCart = useCallback(
     (item) => dispatch({ type: "add-item-to-cart", item }),
     [dispatch]
@@ -132,6 +147,7 @@ export const AppContextProvider = ({ children }) => {
     [dispatch]
   );
 
+  // remove item by ID
   const removeItemFromCart = useCallback(
     (_id) => dispatch({ type: "remove-item-from-cart", _id }),
     [dispatch]
@@ -158,6 +174,8 @@ export const AppContextProvider = ({ children }) => {
     [dispatch]
   );
 
+  const updateSingleItem = useCallback((item) => dispatch({ type: "update-single-item", item }), [dispatch]);
+
   // fetch items from db on load
   useEffect(() => {
     setStatusLoading();
@@ -180,13 +198,14 @@ export const AppContextProvider = ({ children }) => {
       value={{
         ...state,
         actions: {
-          addItemToCart,
-          getItems,
-          removeItemFromCart,
-          restoreCartSession,
+          addItemToCart, // accepts item object to add to carts.items array
+          getItems, // fetches all items, accepts no args
+          removeItemFromCart, // accepts item ID string, removes item from cart.items array
+          restoreCartSession, // gets "forkinator_cart" object from sessionStorage and sets it to cart state
           setStatusError,
           setStatusLoading,
           setStatusIdle,
+          updateSingleItem // accepts item object; replaces existing object of the same _id in carts.item with provided item object
         },
       }}
     >
