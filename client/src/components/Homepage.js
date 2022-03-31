@@ -11,6 +11,7 @@ const Homepage = () => {
     <div>
       <StyledUl>
         <Wrapper>
+          {/* maps though the item array and returns a ListItem component for each. */}
           {items && items.map((item) => <ListItem item={item}></ListItem>)}
         </Wrapper>
       </StyledUl>
