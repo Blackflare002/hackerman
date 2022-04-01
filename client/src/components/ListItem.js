@@ -54,6 +54,10 @@ const StyledButton = styled.button`
   border: none;
   padding: 10px;
   border-radius: 25px;
+  &:hover {
+    cursor: pointer;
+    padding: 15px;
+  }
 `;
 
 const StyledItemPrice = styled.p`

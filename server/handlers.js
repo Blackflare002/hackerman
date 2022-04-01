@@ -14,8 +14,9 @@ const getCompanies = async (req, res) => {
   try {
     await client.connect();
     const db = client.db("ecommerce_db");
-    console.log("connected!");
+    // console.log("connected!");
     const companies = await db.collection("companies").find().toArray();
+    // above we are searching in the collection and are finding all of the items inside the array.
 
     if (companies.length > 0) {
       res.status(200).json({ status: 200, companies, message: "success" });
@@ -26,7 +27,7 @@ const getCompanies = async (req, res) => {
     res.status(500).json({ status: 500, message: err.stack });
   }
   client.close();
-  console.log("disconnected");
+  //   console.log("disconnected");
 };
 // this gets retrieves the individual compagnies by id
 const getACompaniesId = async (req, res) => {
@@ -34,9 +35,10 @@ const getACompaniesId = async (req, res) => {
   try {
     await client.connect();
     const db = client.db("ecommerce_db");
-    console.log("connected!");
+    // console.log("connected!");
     const _id = req.params._id;
     const singleCompanies = await db
+      // singleCompanies is the variable retriefves the id of the compagnies
       .collection("companies")
       .findOne({ _id: Number(_id) });
     if (singleCompanies) {
@@ -50,15 +52,15 @@ const getACompaniesId = async (req, res) => {
     res.status(500).json({ status: 500, message: err.stack });
   }
   client.close();
-  console.log("disconnected");
 };
 // this enpoint retrives the entire array of items.
+//same principle as the get compagnies, but this retrieves items.
 const getItems = async (req, res) => {
   const client = new MongoClient(MONGO_URI, options);
   try {
     await client.connect();
     const db = client.db("ecommerce_db");
-    console.log("connected!");
+
     const items = await db.collection("items").find().toArray();
     if (items.length > 0) {
       res.status(200).json({ status: 200, items, message: "success" });
@@ -69,17 +71,17 @@ const getItems = async (req, res) => {
     res.status(500).json({ status: 500, message: err.stack });
   }
   client.close();
-  console.log("disconnected");
 };
 // this retrieves a single item based off its _Id
+//same principle as what was done with compagnies/:id but this one is for items.
 const getSingleItem = async (req, res) => {
   const client = new MongoClient(MONGO_URI, options);
   try {
     await client.connect();
     const db = client.db("ecommerce_db");
-    console.log("connected!");
+
     const _id = req.params._id;
-    console.log({ _id });
+
     const singleItem = await db
       .collection("items")
       .findOne({ _id: Number(_id) });
@@ -92,20 +94,32 @@ const getSingleItem = async (req, res) => {
     res.status(500).json({ status: 500, message: err.stack });
   }
   client.close();
-  console.log("disconnected");
 };
+//this handler updates the stock. It first checks to see if the item does in fact have a value greater than 0
+//then it allows the code to go threw. It searches for the items_id and then subsequentely reduces the stock.
+// here are the steps: the function looks takes an an object of the cart
+// // this is what the object is supposed to look like VVVVVV
+// {
+// 	"cart":[
+// 		{"_id": 6543, "numPurchased": 2},
+
+// 		{"_id":6545 , "numPurchased": 1}
+
+// 	]
+// }
 const updateItemStock = async (req, res) => {
   const client = new MongoClient(MONGO_URI, options);
   try {
     await client.connect();
-    console.log("connected!");
+
     const db = client.db("ecommerce_db");
     const _id = req.body._id;
     let cart = req.body.cart;
     let idsArray = cart.map((item) => {
       return Number(item._id);
     });
-    console.log(idsArray);
+    //this part below, the numInstock: 1 _id does not work. So instead we used a find to find the stocks that match the cart.
+
     const itemsStock = await db
       .collection("items")
       .find({ _id: { $in: idsArray } }, { numInStock: 1, _id: 0 })
@@ -114,7 +128,8 @@ const updateItemStock = async (req, res) => {
     let stockCheck = itemsStock.find((item) => {
       return item.numInStock <= 0;
     });
-    console.log(stockCheck);
+
+    //check to see if the stock is empty.
     if (stockCheck) {
       return res
         .status(400)
@@ -124,14 +139,15 @@ const updateItemStock = async (req, res) => {
         {
           cart[i]._id;
         }
+        // using a query that matches the _id of the objects in the carts wiith
         const query = { _id: cart[i]._id };
         const updatedValues = {
           $inc: { numInStock: -Number(cart[i].numPurchased) },
         };
+        //updating the cart inside opf teh data base.
         const updatedCart = await db
           .collection("items")
           .updateOne(query, updatedValues);
-        console.log(updatedCart);
       }
       res.status(200).json({ status: 200, cart, message: "success" });
     }
