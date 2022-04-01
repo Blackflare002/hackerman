@@ -41,6 +41,8 @@ const Item = () => {
     addItemToCart(itemData);
   };
 
+  const bodyPart = itemData.body_location;
+
   return (
     // rendering Items and Company info
     <Wrapper>
@@ -56,14 +58,14 @@ const Item = () => {
                 <Category>Category: Cyber-{itemData.category}</Category>
                 <BodyLocation>
                   Fan of Hackerman?<br></br>Suit-up with this perfect fit for
-                  your {itemData.body_location}
+                  your {bodyPart.toLowerCase()}
                 </BodyLocation>
               </ItemDescription>
               <PurchaseSection>
                 <ItemAvailability>                  
                   {itemData.numInStock < 5 && itemData.numInStock > 1 ? ( // displaying an alert if stock runs lower than 5
                     <Stock>
-                      {`Items in Stock: ${itemData.numInStock} (Hurry-up!)`}{" "}
+                      {`Items in Stock: ${itemData.numInStock} (Hurry up!)`}{" "}
                     </Stock>
                   ) : (
                     <Stock>{`Items in Stock: ${itemData.numInStock}`} </Stock>
@@ -98,7 +100,6 @@ export default Item;
 
 // styled components
 const Wrapper = styled.div`
-  
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -109,10 +110,9 @@ const Wrapper = styled.div`
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-`
+`;
 
 const ItemWrapper = styled.div`
-
   position: absolute;
   top: 200px;
   width: 100%;
@@ -153,10 +153,11 @@ const ItemInfo = styled.div`
   height: 300px;
 `;
 
-const ItemDescription = styled.div`  
-  
+
+const ItemDescription = styled.div`
+
   width: 100%;
-  display: grid;  
+  display: grid;
   margin-bottom: 50px;
   align-items: center;
   gap: 20px;
