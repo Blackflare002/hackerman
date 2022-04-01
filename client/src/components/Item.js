@@ -4,6 +4,7 @@ import { AppContext } from "./AppContext";
 import { fontFamily } from "./GlobalStyles";
 
 import styled from "styled-components";
+import background from "../assets/grid.jpg";
 
 const Item = () => {
   const { id } = useParams();
@@ -82,17 +83,23 @@ export default Item;
 const Wrapper = styled.div`
 
   position: absolute;
-  top: 200px;
+  
   display: flex;
   flex-direction: row;
   justify-content: center;
   width: 100vw;  
   height: 100vh;
   background-color: black;
+  background-image: url(${background});
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 `
 
 const ItemWrapper = styled.div`
 
+  position: absolute;
+  top: 200px;
   width: 100%;
   max-width: 1000px;
   height: 500px;
@@ -133,7 +140,8 @@ const ItemInfo = styled.div`
 `
 
 const ItemDescription = styled.div`
-
+  
+  
   width: 100%;
   display: grid;  
   margin-bottom: 50px;
