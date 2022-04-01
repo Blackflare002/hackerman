@@ -1,4 +1,9 @@
 @font-face {
     font-family: "TronFont";
-    src: url('./Tron-JOAa.ttf') format("truetype");
+    src: url("./Tron-JOAa.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "RevampedFont";
+  src: url("./Revamped-X3q1a.ttf") format("truetype");
 }
