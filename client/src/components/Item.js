@@ -61,7 +61,7 @@ const Item = () => {
               </ItemDescription>
               <PurchaseSection>
                 <ItemAvailability>                  
-                  {itemData.numInStock < 5 ? ( // displaying an alert if stock runs lower than 5
+                  {itemData.numInStock < 5 && itemData.numInStock > 1 ? ( // displaying an alert if stock runs lower than 5
                     <Stock>
                       {`Items in Stock: ${itemData.numInStock} (Hurry-up!)`}{" "}
                     </Stock>
@@ -79,7 +79,11 @@ const Item = () => {
                   <Country>{companyData.country}</Country>
                 </CompanyInfo>
                 <Cartbutton>
-                  <Button onClick={handleAddToCart}>ADD TO CART</Button>
+                  {itemData.numInStock  != 0  ? (
+                  <Button onClick={handleAddToCart}>ADD TO CART</Button> 
+                  ) : (
+                  <Button disabled={true}>OUT OF STOCK</Button>
+                  )}
                 </Cartbutton>
               </CompanyInfoWrapper>
             </ItemInfo>
@@ -237,6 +241,7 @@ const Button = styled.button`
   height: 50px;
   font-size: 16px;
   font-family: ${fontFamily};
+  border-radius: 10px;
   color: #bc13fe;
   box-shadow: 0 0 0.2rem #fff, 0 0 0.2rem #fff, 0 0 2rem #bc13fe,
     0 0 0.8rem #bc13fe, 0 0 2.8rem #bc13fe, inset 0 0 1.3rem #bc13fe;
@@ -252,5 +257,18 @@ const Button = styled.button`
   }
   :active {
     transform: translateY(4px);
+  }
+  :disabled {
+
+    cursor: pointer;
+    color: orange;
+    background-color: black;
+    border: solid orange 1px;
+    transition: box-shadow 0.5s ease-in-out;
+    text-shadow: 0 0 7px red, 0 0 10px red, 0 0 21px red, 0 0 42px red,
+      0 0 82px red, 0 0 92px red, 0 0 102px red, 0 0 151px red;
+    box-shadow: 0 0 7px red, 0 0 10px red, 0 0 21px red, 0 0 42px red,
+      0 0 82px red, 0 0 92px red, 0 0 102px red, 0 0 151px red;
+
   }
 `;
