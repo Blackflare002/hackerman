@@ -86,7 +86,7 @@ const Title = styled.h3`
     cursor: pointer;
     color: whitesmoke;
     transition: box-shadow 0.1s ease-in-out;
-    box-shadow: 0 0 2px whitesmoke, 0 0 3px whitesmoke, 0 0 5px whitesmoke, 0 0 5px #0fa,
+    text-shadow: 0 0 2px whitesmoke, 0 0 3px whitesmoke, 0 0 5px whitesmoke, 0 0 5px #0fa,
       0 0 10px #0fa, 0 0 12px #0fa, 0 0 12px #0fa, 0 0 30px #0fa;
   }
   :active {
