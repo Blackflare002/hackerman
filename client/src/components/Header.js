@@ -13,7 +13,7 @@ const Header = () => {
     <Glow>
       <Wrapper>
         <StyledLink to={`/`}>
-          <h3>TR0N</h3>
+          <Title>TR0N</Title>
         </StyledLink>
         <div>
           <StyledLink to={`/cart`}>
@@ -50,6 +50,11 @@ const CartBox = styled.div`
 const StyledLink = styled(Link)`
   text-decoration: none;
 `;
+
+const Title = styled.h3`
+  font-family: "TronFont";
+  font-size: 2rem;
+`
 
 const Wrapper = styled.header`
   display: flex;
