@@ -31,8 +31,6 @@ const Header = () => {
               <span>Cart</span>
             </CartBox>
           </StyledLink>
-          {/* <p>{size} items in cart</p> */}
-          {/* <p>Total: ${totalCost}</p> */}
         </div>
       </Wrapper>
     </Glow>
