@@ -53,11 +53,26 @@ const Glow = styled.div`
 `;
 
 const CartBox = styled.div`
-  display: flex;
-  gap: 8px;
-  font-size: large;
-  padding: 10px;
-  border: solid 1px white;
+  display: flex;  
+  font-size: 18px;
+  font-family: "TronFont";  
+  border: solid 1px #0fa;
+  border-radius: 15px;
+  box-shadow: 0 2px 5px whitesmoke;
+  width: 150px;
+  height: 50px;
+  justify-content: space-evenly; 
+  align-items: center;
+  :hover {
+    cursor: pointer;
+    color: whitesmoke;
+    transition: box-shadow 0.1s ease-in-out;
+    box-shadow: 0 0 2px whitesmoke, 0 0 3px whitesmoke, 0 0 5px whitesmoke, 0 0 5px #0fa,
+      0 0 10px #0fa, 0 0 12px #0fa, 0 0 12px #0fa, 0 0 30px #0fa;
+  }
+  :active {
+    transform: translateY(4px);
+  }
 `;
 
 const StyledLink = styled(Link)`
@@ -67,6 +82,16 @@ const StyledLink = styled(Link)`
 const Title = styled.h3`
   font-family: "TronFont";
   font-size: 24px;
+  :hover {
+    cursor: pointer;
+    color: whitesmoke;
+    transition: box-shadow 0.1s ease-in-out;
+    box-shadow: 0 0 2px whitesmoke, 0 0 3px whitesmoke, 0 0 5px whitesmoke, 0 0 5px #0fa,
+      0 0 10px #0fa, 0 0 12px #0fa, 0 0 12px #0fa, 0 0 30px #0fa;
+  }
+  :active {
+    transform: translateY(4px);
+  }
 `;
 
 const Wrapper = styled.header`
@@ -88,8 +113,9 @@ const HomeWrapper = styled.div`
 `;
 
 const Logo = styled.img`
-  width: 70px;
-  border-radius: 50%;
+  width: 80px;
+  height: 70px;
+  border-radius: 15%;
 `;
 
 const CatchPhrase = styled.p`
