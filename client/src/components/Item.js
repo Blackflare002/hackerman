@@ -81,7 +81,7 @@ const Item = () => {
                   <Country>{companyData.country}</Country>
                 </CompanyInfo>
                 <Cartbutton>
-                  {itemData.numInStock  != 0  ? (
+                  {itemData.numInStock  != 0  ? ( // disabling the button if no item left in stock
                   <Button onClick={handleAddToCart}>ADD TO CART</Button> 
                   ) : (
                   <Button disabled={true}>OUT OF STOCK</Button>
@@ -130,6 +130,7 @@ const ItemWrapper = styled.div`
 `;
 
 const ItemImage = styled.div`
+
   display: flex;
   justify-content: center;
   width: 400px;
@@ -137,7 +138,9 @@ const ItemImage = styled.div`
   padding: 10px;
   align-items: center;
 `;
+
 const Image = styled.img`
+
   width: 350px;
   height: 350px;
   border-radius: 10px;
@@ -145,18 +148,23 @@ const Image = styled.img`
 `;
 
 const ItemInfo = styled.div`
+
   width: 75%;
   height: 300px;
 `;
 
+
 const ItemDescription = styled.div`
+
   width: 100%;
   display: grid;
   margin-bottom: 50px;
   align-items: center;
   gap: 20px;
 `;
+
 const ItemName = styled.p`
+
   margin: 0px;
   font-family: ${fontFamily};
   font-size: 32px;
@@ -164,6 +172,7 @@ const ItemName = styled.p`
 `;
 
 const Category = styled.p`
+
   margin: 0px;
   font-family: ${fontFamily};
   font-size: 18px;
@@ -171,17 +180,20 @@ const Category = styled.p`
   color: lightgrey;
 `;
 const BodyLocation = styled.p`
+
   margin: 0px;
   font-family: ${fontFamily};
   color: lightgrey;
 `;
 const Stock = styled.p`
+
   margin: 0px;
   font-family: ${fontFamily};
   font-size: 16px;
   color: lightgrey;
 `;
 const Price = styled.p`
+
   margin: 0px;
   font-family: ${fontFamily};
   font-size: 32px;
@@ -190,6 +202,7 @@ const Price = styled.p`
 `;
 
 const PurchaseSection = styled.div`
+
   display: grid;
   grid-template-columns: auto auto;
   align-items: center;
@@ -199,6 +212,7 @@ const PurchaseSection = styled.div`
 `;
 
 const ItemAvailability = styled.div`
+
   width: 150px;
   color: lightgrey;
 `;
@@ -208,11 +222,13 @@ const ItemPrice = styled.div``;
 const Cartbutton = styled.div``;
 
 const CompanyInfoWrapper = styled.div`
+
   display: flex;
   align-items: center;
   gap: 150px;
 `;
 const CompanyInfo = styled.a`
+
   text-align: center;
   text-decoration: none;
   color: whitesmoke;
@@ -224,17 +240,20 @@ const CompanyInfo = styled.a`
   border-radius: 10px; ;
 `;
 const CompanyName = styled.p`
+
   margin: 0px;
   font-family: ${fontFamily};
   font-size: 20px;
 `;
 const Country = styled.p`
+
   margin: 0px;
   font-family: ${fontFamily};
   font-style: italic;
 `;
 
 const Button = styled.button`
+
   width: 150px;
   height: 50px;
   font-size: 16px;
@@ -257,7 +276,6 @@ const Button = styled.button`
     transform: translateY(4px);
   }
   :disabled {
-
     cursor: pointer;
     color: orange;
     background-color: black;
@@ -267,6 +285,5 @@ const Button = styled.button`
       0 0 82px red, 0 0 92px red, 0 0 102px red, 0 0 151px red;
     box-shadow: 0 0 7px red, 0 0 10px red, 0 0 21px red, 0 0 42px red,
       0 0 82px red, 0 0 92px red, 0 0 102px red, 0 0 151px red;
-
   }
 `;
