@@ -7,14 +7,19 @@ import styled from "styled-components";
 import background from "../assets/grid.jpg";
 
 const Item = () => {
+  // retrieving item ID from params
   const { id } = useParams();
+  // using App context
   const {
     actions: { addItemToCart, setStatusError },
   } = useContext(AppContext);
+  // initializing Items data state
   const [itemData, setItemData] = useState();
+  // initializing Companies data state
   const [companyData, setCompanyData] = useState();
 
   useEffect(() => {
+    // fetching and updating Item data state
     fetch(`/items/${id}`)
       .then((res) => res.json())
       .then((data) => setItemData(data.singleItem))
@@ -22,6 +27,7 @@ const Item = () => {
   }, []);
 
   useEffect(() => {
+    // fetching and updating Company data state
     if (itemData) {
       // only fetch company by ID if itemData exists
       fetch(`/companies/${itemData.companyId}`)
@@ -54,8 +60,8 @@ const Item = () => {
                 </BodyLocation>
               </ItemDescription>
               <PurchaseSection>
-                <ItemAvailability>
-                  {itemData.numInStock < 5 ? (
+                <ItemAvailability>                  
+                  {itemData.numInStock < 5 ? ( // displaying an alert if stock runs lower than 5
                     <Stock>
                       {`Items in Stock: ${itemData.numInStock} (Hurry-up!)`}{" "}
                     </Stock>
@@ -86,6 +92,7 @@ const Item = () => {
 
 export default Item;
 
+// styled components
 const Wrapper = styled.div`
   
   display: flex;
