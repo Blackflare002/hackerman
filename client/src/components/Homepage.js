@@ -49,6 +49,8 @@ const Tagline = styled.h1`
   font-size: 40px;
   font-family: "RevampedFont";
   transform: skew(-15deg, -7deg);
+  text-decoration: underline;
+  text-underline-offset: 15px;
   /* font-weight: bold; */
   font-style: italic;
   text-shadow: 0 0 7px #fff, 0 0 10px #fff, 0 0 21px #4b0082, 0 0 42px #4b0082,
