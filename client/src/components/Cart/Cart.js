@@ -1,16 +1,38 @@
 import { useContext } from "react";
 import { AppContext } from "../AppContext";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
+import CartItem from "./CartItem";
 
 const Cart = () => {
+  const navigate = useNavigate();
   const {
     cart,
     cart: { items, size, totalCost },
-    actions: { removeItemFromCart },
+    actions: { clearCart, saveOrder, removeItemFromCart, setStatusError },
   } = useContext(AppContext);
 
   const handleRemoveFromCart = (_id) => {
     removeItemFromCart(_id);
+  };
+
+  const handleConfirmPurchase = () => {
+    fetch(`/cart/update-stock`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ cart: items }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        saveOrder(cart); // save order to completedOrder state to display in /confirmed route
+        clearCart(); // clear cart state on successful purchase
+        navigate("/confirmed");
+      })
+      .catch((err) => {
+        setStatusError(err);
+      });
   };
 
   return (
@@ -22,33 +44,21 @@ const Cart = () => {
       <ul>
         {cart &&
           items.map((item) => (
-            <li>
-              <ProductInfo1>
-                <StyledImage src={item.imageSrc} />
-
-                <Info>
-                  <Information>{item.name}</Information>
-                  <Information>{item.price}</Information>
-                  <Category>{item.category}</Category>
-
-                  <StyledButton onClick={() => handleRemoveFromCart(item._id)}>
-                    Delete
-                  </StyledButton>
-                </Info>
-              </ProductInfo1>
-              <LineBreak></LineBreak>
-            </li>
+            <CartItem item={item} handleRemoveFromCart={handleRemoveFromCart} />
           ))}
         <SubtotalWrapper>
           <p> Subtotal ({size} items) </p>
           <p>Total: ${totalCost}</p>
+          <ConfirmBtn onClick={handleConfirmPurchase}>
+            Confirm Purchase
+          </ConfirmBtn>
         </SubtotalWrapper>
       </ul>
     </Wrapper>
   );
 };
 const Wrapper = styled.div`
-  margin-top: 100px;
+  padding-top: 5%;
   border: 2px solid grey;
   border-radius: 9px;
   max-width: 700px;
@@ -66,10 +76,7 @@ const LineBreak = styled.div`
   border-bottom: 1px solid grey;
   margin-top: 10px;
 `;
-const StyledImage = styled.img`
-  border-radius: 5px;
-  width: 150px;
-`;
+
 const HeaderWrapper = styled.div``;
 const SubtotalWrapper = styled.div`
   display: flex;
@@ -77,19 +84,16 @@ const SubtotalWrapper = styled.div`
   padding-bottom: 20px;
   justify-content: flex-end;
   margin-right: 10px;
-`;
-const ProductInfo1 = styled.div`
-  display: flex;
   align-items: center;
-  line-height: 35px;
-  margin-left: 10px;
-  margin-top: 8px; ;
 `;
+
 const Category = styled.span`
   font-style: italic;
   margin-left: 10px;
 `;
 const StyledButton = styled.button`
+  margin-left: 5px;
+  margin-right: 5px;
   background-color: #ffd633;
   color: white;
   font-weight: bold;
@@ -99,6 +103,23 @@ const StyledButton = styled.button`
   margin-left: 10px;
   &:hover {
     cursor: pointer;
+  }
+`;
+const ConfirmBtn = styled.button`
+  margin-left: 10px;
+  background-color: #ffd633;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  padding: 10px 20px;
+  cursor: pointer;
+  &:hover,
+  :active {
+    background-color: orange;
+    color: white;
+  }
+  &:active {
+    background-color: grey;
   }
 `;
 
