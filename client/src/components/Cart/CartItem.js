@@ -49,7 +49,7 @@ const Category = styled.span`
   margin-left: 10px;
 `;
 const StyledButton = styled.button`
-  background-color: #ffd633;
+  background-color: #bc13fe;
   color: white;
   font-weight: bold;
   border-radius: 7px;
@@ -67,4 +67,5 @@ const Information = styled.span`
 const Info = styled.div`
   display: flex;
   flex-direction: column;
+  padding: 10px;
 `;
