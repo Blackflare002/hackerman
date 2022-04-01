@@ -87,13 +87,12 @@ const Item = () => {
 export default Item;
 
 const Wrapper = styled.div`
-  position: absolute;
   
   display: flex;
   flex-direction: row;
   justify-content: center;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   background-color: black;
   background-image: url(${background});
   background-position: center;
