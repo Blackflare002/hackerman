@@ -46,22 +46,34 @@ const reducer = (state, action) => {
 
     case "add-item-to-cart": {
       const { cart } = state;
-      const { item } = action;
+
       //totalCost is stored as a string, needs to be converted to a number for summing
       const updatedTotalCost =
-        Number(cart.totalCost) + Number(item.price.slice(1)); // add price to total
+        Number(cart.totalCost) + Number(action.item.price.slice(1)); // add price to total
 
-      // build new cart object to both set new state AND sessionStorage
+      // create local cart for manipulation
       const updatedCart = {
         ...cart,
-        items: [
-          ...cart.items,
-          item, // add item to items array in cart
-        ],
         totalCost: updatedTotalCost.toFixed(2), // .toFixed() returns a string
         size: cart.size + 1, // increment cart size by 1}
       };
 
+      // check if already in cart
+      // increment .numPurchased by 1
+      const foundIndex = updatedCart.items.findIndex(
+        (item) => item._id === action.item._id
+      );
+
+      if (foundIndex > -1) {
+        updatedCart.items[foundIndex].numPurchased++; // strict mode caused increment to happen twice inside reducers
+      } else {
+        // if not already in cart
+        // build item object with numPurchased key to keep track of amount added to cart
+
+        updatedCart.items.push({ ...action.item, numPurchased: 1 });
+      }
+
+      // set updatedCart to sessionStorage
       sessionStorage.setItem("forkinators_cart", JSON.stringify(updatedCart));
 
       return {
@@ -71,15 +83,21 @@ const reducer = (state, action) => {
     }
 
     case "remove-item-from-cart": {
+      // remove one item of provided id
       const { items } = state.cart;
 
-      // remove one item of id provided
       const foundIndex = items.findIndex((item) => item._id === action._id);
       const updatedItems = [...items];
       let updatedTotal = Number(state.cart.totalCost);
-      // only remove item if provided item id is found inside cart
+      // check if provided item id is found inside cart
       if (foundIndex !== -1) {
-        updatedItems.splice(foundIndex, 1);
+        // if only one of item is in cart, remove from cart
+        if (updatedItems[foundIndex].numPurchased === 1) {
+          updatedItems.splice(foundIndex, 1);
+        } else {
+          // else, decrement numPurchased
+          updatedItems[foundIndex].numPurchased--;
+        }
         // if item is found, find the price to deduct from totalCost
         updatedTotal = updatedTotal - Number(items[foundIndex].price.slice(1));
       }
@@ -118,19 +136,21 @@ const reducer = (state, action) => {
 
     case "update-single-item": {
       const { items } = state;
-      const indexToUpdate = items.findIndex(item => item._id === action.item._id);
+      const indexToUpdate = items.findIndex(
+        (item) => item._id === action.item._id
+      );
+
       const updatedItems = [...items];
 
       updatedItems[indexToUpdate] = action.item; // replace item with provided item
 
       return {
         ...state,
-        items: updatedItems
-      }
+        items: updatedItems,
+      };
     }
     default:
   }
-
 };
 
 export const AppContextProvider = ({ children }) => {
@@ -174,8 +194,11 @@ export const AppContextProvider = ({ children }) => {
     [dispatch]
   );
 
-  const updateSingleItem = useCallback((item) => dispatch({ type: "update-single-item", item }), [dispatch]);
-
+  const updateSingleItem = useCallback(
+    (item) => dispatch({ type: "update-single-item", item }),
+    [dispatch]
+  );
+  
   // fetch items from db on load
   useEffect(() => {
     setStatusLoading();
@@ -205,7 +228,7 @@ export const AppContextProvider = ({ children }) => {
           setStatusError,
           setStatusLoading,
           setStatusIdle,
-          updateSingleItem // accepts item object; replaces existing object of the same _id in carts.item with provided item object
+          updateSingleItem, // accepts item object; replaces existing object of the same _id in carts.item with provided item object
         },
       }}
     >
