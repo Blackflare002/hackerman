@@ -62,10 +62,12 @@ const StyledButton = styled.button`
 
 const StyledItemPrice = styled.p`
   font-size: large;
+  color: lightgrey;
 `;
 
 const StyledItemName = styled.p`
   font-weight: bold;
+  color: lightgrey;
   text-align: center;
 `;
 
