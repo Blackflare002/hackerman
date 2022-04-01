@@ -151,6 +151,7 @@ const ItemName = styled.p`
   margin: 0px;
   font-family: ${fontFamily};
   font-size: 32px;
+  color: lightgrey;
 `;
 
 const Category = styled.p`
@@ -158,15 +159,18 @@ const Category = styled.p`
   font-family: ${fontFamily};
   font-size: 18px;
   font-style: italic;
+  color: lightgrey;
 `;
 const BodyLocation = styled.p`
   margin: 0px;
   font-family: ${fontFamily};
+  color: lightgrey;
 `;
 const Stock = styled.p`
   margin: 0px;
   font-family: ${fontFamily};
   font-size: 16px;
+  color: lightgrey;
 `;
 const Price = styled.p`
   margin: 0px;
@@ -187,6 +191,7 @@ const PurchaseSection = styled.div`
 
 const ItemAvailability = styled.div`
   width: 150px;
+  color: lightgrey;
 `;
 
 const ItemPrice = styled.div``;

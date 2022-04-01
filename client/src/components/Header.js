@@ -17,10 +17,12 @@ const Header = () => {
         <StyledLink to={`/`}>
           <HomeWrapper>
             <Logo src={logo} />
-            <Title>Home</Title>
+            <Title>HACKERMAN</Title>
           </HomeWrapper>
         </StyledLink>
-        <CatchPhrase>Rage-quit your life and follow me to the Cyberspace...</CatchPhrase>
+        <CatchPhrase>
+          Rage-quit your life, follow me to Cyberspace...
+        </CatchPhrase>
         <div>
           <StyledLink to={`/cart`}>
             <CartBox>
@@ -65,11 +67,10 @@ const StyledLink = styled(Link)`
 const Title = styled.h3`
   font-family: "TronFont";
   font-size: 24px;
-`
+`;
 
 const Wrapper = styled.header`
-  
-  display: flex;  
+  display: flex;
   justify-content: space-between;
   align-items: center;
   height: 80px;
@@ -82,21 +83,18 @@ const Wrapper = styled.header`
 `;
 
 const HomeWrapper = styled.div`
-
   display: flex;
   align-items: center;
-`
+`;
 
 const Logo = styled.img`
-
   width: 70px;
   border-radius: 50%;
-`
+`;
 
 const CatchPhrase = styled.p`
-
   font-family: "TronFont";
   font-size: 24px;
-`
+`;
 
 export default Header;
