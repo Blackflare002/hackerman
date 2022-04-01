@@ -47,6 +47,8 @@ const Hero = styled.div`
 const Tagline = styled.h1`
   color: white;
   font-size: 40px;
+  font-family: "RevampedFont";
+  transform: skew(-15deg, -7deg);
   /* font-weight: bold; */
   font-style: italic;
   text-shadow: 0 0 7px #fff, 0 0 10px #fff, 0 0 21px #4b0082, 0 0 42px #4b0082,
@@ -68,6 +70,7 @@ const BigTypography = styled.h1`
   /* text-shadow: 0 0 7px #fff, 0 0 10px #fff, 0 0 21px #fff, 0 0 42px #0fa,
     0 0 82px #0fa, 0 0 92px #0fa, 0 0 102px #0fa, 0 0 151px #0fa; */
   font-size: 145px;
+  transform: rotate(-3deg);
   font-weight: bold;
   color: white;
   font-family: "tronFont";
