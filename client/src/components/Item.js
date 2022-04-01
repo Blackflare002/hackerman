@@ -97,9 +97,8 @@ const Wrapper = styled.div`
 `;
 
 const ItemWrapper = styled.div`
-  width: 100%;
-  max-width: 1000px;
-  height: 500px;
+  width: 60%;
+  height: 50%;
   display: flex;
   gap: 30px;
   align-items: center;
@@ -114,9 +113,8 @@ const ItemWrapper = styled.div`
 const ItemImage = styled.div`
   display: flex;
   justify-content: center;
-  width: 100%;
-  max-width: 400px;
-  height: auto;
+  width: 400px;
+  height: 400px;
   padding: 10px;
   align-items: center;
 `;
@@ -128,13 +126,11 @@ const Image = styled.img`
 `;
 
 const ItemInfo = styled.div`
-  width: 100%;
-  max-width: 500px;
-  height: auto;
+  width: 75%;
+  height: 300px;
 `;
 
 const ItemDescription = styled.div`
-  width: 100%;
   display: grid;
   margin-bottom: 50px;
   align-items: center;
@@ -170,7 +166,8 @@ const Price = styled.p`
 `;
 
 const PurchaseSection = styled.div`
-  display: flex;
+  display: grid;
+  grid-template-columns: auto auto;
   align-items: center;
   justify-content: flex-start;
   gap: 190px;
@@ -188,8 +185,7 @@ const Cartbutton = styled.div``;
 const CompanyInfoWrapper = styled.div`
   display: flex;
   align-items: center;
-  justify-content: flex-start;
-  gap: 165px;
+  gap: 150px;
 `;
 const CompanyInfo = styled.a`
   text-align: center;
