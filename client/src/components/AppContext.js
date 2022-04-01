@@ -139,6 +139,7 @@ const reducer = (state, action) => {
       const indexToUpdate = items.findIndex(
         (item) => item._id === action.item._id
       );
+
       const updatedItems = [...items];
 
       updatedItems[indexToUpdate] = action.item; // replace item with provided item
@@ -197,7 +198,7 @@ export const AppContextProvider = ({ children }) => {
     (item) => dispatch({ type: "update-single-item", item }),
     [dispatch]
   );
-
+  
   // fetch items from db on load
   useEffect(() => {
     setStatusLoading();

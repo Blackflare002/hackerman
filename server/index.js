@@ -9,6 +9,7 @@ const {
   getItems,
   getSingleItem,
   getACompaniesId,
+  updateItemStock,
 } = require("./handlers");
 
 express()
@@ -30,9 +31,15 @@ express()
   .use("/", express.static(__dirname + "/"))
 
   // REST endpoints?
+  //this endpoint gets all of the compagnies
   .get("/companies", getCompanies)
+  // this endpoing retrieves the cvompagnies by _id
   .get("/companies/:_id", getACompaniesId)
+  //this endpoint retrieves all items
   .get("/items", getItems)
+  //this endpoint retrieves items by their _id
   .get("/items/:_id", getSingleItem)
+  //this endpoint is to update the value of the stock when the stock itself is not 0
+  .patch("/cart/update-stock", updateItemStock)
 
   .listen(PORT, () => console.info(`Listening on port ${PORT}`));
