@@ -80,12 +80,17 @@ const StyledLink = styled(Link)`
 const Title = styled.h3`
   font-family: "TronFont";
   font-size: 24px;
+  text-shadow: 0 0 2px #0fa, 0 0 3px #0fa, 0 0 5px #0fa, 0 0 5px #0fa,
+      0 0 10px #0fa, 0 0 12px #0fa, 0 0 12px #0fa, 0 0 30px #0fa;
+  
   :hover {
     cursor: pointer;
     color: whitesmoke;
+    transition: text-shadow 0.1s ease-in-out;
     transition: box-shadow 0.1s ease-in-out;
-    text-shadow: 0 0 2px whitesmoke, 0 0 3px whitesmoke, 0 0 5px whitesmoke, 0 0 5px #0fa,
-      0 0 10px #0fa, 0 0 12px #0fa, 0 0 12px #0fa, 0 0 30px #0fa;
+    text-shadow: 0 0 4px whitesmoke, 0 0 6px whitesmoke, 0 0 10px whitesmoke, 0 0 10px #0fa,
+      0 0 20px #0fa, 0 0 24px #0fa, 0 0 24px #0fa, 0 0 60px #0fa;
+    
   }
   :active {
     transform: translateY(4px);
