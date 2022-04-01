@@ -41,7 +41,7 @@ const Item = () => {
     addItemToCart(itemData);
   };
 
-  const bodyPart = itemData.body_location;
+  const bodyPart = itemData?.body_location;
 
   return (
     // rendering Items and Company info
