@@ -24,7 +24,7 @@ export default createGlobalStyle`
     }
 
     :root {
---realDarkGrey: #424245
+--realDarkGrey: #1e1e1e
     }
 
     html, body, div,

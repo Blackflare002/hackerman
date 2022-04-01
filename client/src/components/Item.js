@@ -1,10 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { AppContext } from "./AppContext";
-import { colors, fontFamily } from "./GlobalStyles";
-import { Link } from "react-router-dom";
-
-
+import { fontFamily } from "./GlobalStyles";
 
 import styled from "styled-components";
 
@@ -35,7 +32,6 @@ const Item = () => {
   const handleAddToCart = () => {
     addItemToCart(itemData);
   };
-
   
 
   return (
@@ -54,7 +50,7 @@ const Item = () => {
                   <BodyLocation>Fan of Hackerman?<br></br>Suit-up with this perfect fit for your  {itemData.body_location}</BodyLocation>                
                 </ItemDescription>
                 <PurchaseSection>
-                  <ItemAvailability>
+                  <ItemAvailability>                    
                     {itemData.numInStock < 5 ?
                     <Stock>{`Items in Stock: ${itemData.numInStock} (Hurry-up!)`} </Stock> :
                     <Stock>{`Items in Stock: ${itemData.numInStock}`} </Stock>
@@ -65,7 +61,7 @@ const Item = () => {
                   </ItemPrice>                
                 </PurchaseSection>
                 <CompanyInfoWrapper>
-                  <CompanyInfo to={companyData.url}>        
+                  <CompanyInfo href={companyData.url}>        
                     <CompanyName>{companyData.name}</CompanyName>
                     <Country>{companyData.country}</Country>                    
                   </CompanyInfo>
@@ -90,15 +86,16 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
-  width: 100%;
+  width: 100vw;  
   height: 100vh;
   background-color: black;
 `
 
 const ItemWrapper = styled.div`
 
-  width: 60%;
-  height: 50%;
+  width: 100%;
+  max-width: 1000px;
+  height: 500px;
   display: flex;
   gap: 30px;
   align-items: center;
@@ -114,12 +111,13 @@ const ItemImage = styled.div`
   
   display: flex;
   justify-content: center;
-  width: 400px;
-  height: 400px;
+  width: 100%;
+  max-width: 400px;
+  height: auto;
   padding: 10px;  
   align-items: center;
 `
-const Image = styled.img`
+const Image = styled.img`  
   
   width: 350px;
   height: 350px;
@@ -129,13 +127,14 @@ const Image = styled.img`
 
 const ItemInfo = styled.div`
 
-  width: 75%;
-  height: 300px;
-  
+  width: 100%;
+  max-width: 500px;
+  height: auto;  
 `
 
 const ItemDescription = styled.div`
 
+  width: 100%;
   display: grid;  
   margin-bottom: 50px;
   align-items: center;
@@ -177,10 +176,10 @@ const Price = styled.p`
 
 const PurchaseSection = styled.div`
 
-  display: grid;
-  grid-template-columns: auto auto;  
+  display: flex;  
   align-items: center;
-  gap: 170px;
+  justify-content: flex-start;
+  gap: 190px;
   margin-bottom: 50px;
 `
 
@@ -199,14 +198,16 @@ const CompanyInfoWrapper = styled.div`
 
   display: flex;  
   align-items: center;
-  gap: 150px;  
+  justify-content: flex-start;
+  gap: 165px;  
 `
-const CompanyInfo = styled(Link)`
+const CompanyInfo = styled.a`
 
   text-align: center;
   text-decoration: none;
   color: whitesmoke;
-  width: 30%;
+  width: 150px;
+  min-width: 150px;
   border: solid white 1px;
   padding: 10px;
   box-shadow: 0 3px 10px whitesmoke;
@@ -222,15 +223,10 @@ const Country = styled.p`
   font-family: ${fontFamily};
   font-style: italic;
 `
-const CompanyLink = styled(Link)`
-  margin: 0px;
-  font-family: ${fontFamily};
-  text-decoration: none;
-  color: whitesmoke;
-`
 
 const Button = styled.button`
-  width: 300px;
+  
+  width: 150px;
   height: 50px;
   font-size: 16px;
   font-family: ${fontFamily};  
