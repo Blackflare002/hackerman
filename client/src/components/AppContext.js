@@ -11,6 +11,7 @@ const initialState = {
     totalCost: 0, // totalCost updates as items array updates
     size: 0, // size updates as items as items array updates
   },
+  completedOrder: null
 };
 
 const reducer = (state, action) => {
@@ -82,6 +83,16 @@ const reducer = (state, action) => {
       };
     }
 
+    // clear cart state and in sessionStorage
+    case "clear-cart": {
+      sessionStorage.removeItem("forkinators_cart");
+
+      return {
+        ...state,
+        cart: initialState.cart,
+      };
+    }
+
     case "remove-item-from-cart": {
       // remove one item of provided id
       const { items } = state.cart;
@@ -134,6 +145,13 @@ const reducer = (state, action) => {
       return newState;
     }
 
+    case "save-order": {
+      return {
+        ...state,
+        completedOrder: action.cart
+      }
+    }
+
     case "update-single-item": {
       const { items } = state;
       const indexToUpdate = items.findIndex(
@@ -161,6 +179,11 @@ export const AppContextProvider = ({ children }) => {
     (item) => dispatch({ type: "add-item-to-cart", item }),
     [dispatch]
   );
+  // clear cart state and in sessionStorage
+  const clearCart = useCallback(
+    () => dispatch({ type: "clear-cart" }),
+    [dispatch]
+  );
 
   const getItems = useCallback(
     (items) => dispatch({ type: "get-items", items }),
@@ -178,6 +201,8 @@ export const AppContextProvider = ({ children }) => {
     () => dispatch({ type: "restore-cart-session" }),
     [dispatch]
   );
+
+  const saveOrder = useCallback((cart) => dispatch({ type:"save-order", cart }))
 
   const setStatusIdle = useCallback(
     () => dispatch({ type: "set-status-idle" }),
@@ -198,7 +223,7 @@ export const AppContextProvider = ({ children }) => {
     (item) => dispatch({ type: "update-single-item", item }),
     [dispatch]
   );
-  
+
   // fetch items from db on load
   useEffect(() => {
     setStatusLoading();
@@ -222,9 +247,11 @@ export const AppContextProvider = ({ children }) => {
         ...state,
         actions: {
           addItemToCart, // accepts item object to add to carts.items array
+          clearCart, // clear cart from state and sessionStorage
           getItems, // fetches all items, accepts no args
           removeItemFromCart, // accepts item ID string, removes item from cart.items array
           restoreCartSession, // gets "forkinator_cart" object from sessionStorage and sets it to cart state
+          saveOrder, // accepts whole cart object (only on purchase)
           setStatusError,
           setStatusLoading,
           setStatusIdle,
