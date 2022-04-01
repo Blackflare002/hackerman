@@ -11,7 +11,7 @@ const ListItem = ({ item }) => {
   } = useContext(AppContext);
   return (
     <Wrapper
-      onMouseEnter={() => {
+      onMouseOver={() => {
         setShowButton(true);
       }}
       onMouseLeave={() => {
@@ -32,7 +32,7 @@ const ListItem = ({ item }) => {
                     ev.stopPropagation();
                     addItemToCart(item);
                   }}
-                >
+                > 
                   Add to Cart
                 </StyledButton>
               ) : null}
