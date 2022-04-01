@@ -1,13 +1,15 @@
 import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { AppContext } from "../AppContext";
 import CartItem from "./CartItem";
 
 const Cart = () => {
+  const navigate = useNavigate();
   const {
     cart,
     cart: { items, size, totalCost },
-    actions: { removeItemFromCart },
+    actions: { clearCart, saveOrder, removeItemFromCart, setStatusError },
   } = useContext(AppContext);
 
   const handleRemoveFromCart = (_id) => {
@@ -15,7 +17,22 @@ const Cart = () => {
   };
 
   const handleConfirmPurchase = () => {
-    
+    fetch(`/cart/update-stock`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ cart: items }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        saveOrder(cart); // save order to completedOrder state to display in /confirmed route
+        clearCart(); // clear cart state on successful purchase
+        navigate("/confirmed");
+      })
+      .catch((err) => {
+        setStatusError(err);
+      });
   };
 
   return (

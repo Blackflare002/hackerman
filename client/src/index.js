@@ -4,10 +4,10 @@ import App from './components/App';
 import { AppContextProvider } from './components/AppContext';
 
 ReactDOM.render(
-  <React.StrictMode>
+  // <React.StrictMode>
     <AppContextProvider>
       <App />
-    </AppContextProvider>
-  </React.StrictMode>,
+    </AppContextProvider>,
+  // </React.StrictMode>, // strict mode causes increments/decrements in reducers to run twice
   document.getElementById('root')
 );
