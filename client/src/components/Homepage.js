@@ -21,7 +21,13 @@ const Homepage = () => {
         <StyledUl>
           <Wrapper>
             {/* maps though the item array and returns a ListItem component for each. */}
-            {items && items.map((item) => <ListItem item={item}></ListItem>)}
+            {items &&
+              items.map((item) => (
+                <ListItem
+                  item={item}
+                  key={Math.floor(Math.random() * 6942069)}
+                ></ListItem>
+              ))}
           </Wrapper>
         </StyledUl>
       </div>
@@ -35,22 +41,22 @@ const Hero = styled.div`
   align-items: center;
   flex-direction: column;
   margin: 150px;
-  gap: 40px;
+  gap: 75px;
 `;
 
 const Tagline = styled.h1`
   color: white;
-  font-size: xx-large;
+  font-size: 40px;
   /* font-weight: bold; */
   font-style: italic;
-  text-shadow: 0 0 7px #fff, 0 0 10px #fff, 0 0 21px #fff, 0 0 42px #0fa,
-    0 0 82px #0fa, 0 0 92px #0fa, 0 0 102px #0fa, 0 0 151px #0fa;
+  text-shadow: 0 0 7px #fff, 0 0 10px #fff, 0 0 21px #4b0082, 0 0 42px #4b0082,
+    0 0 82px #4b0082, 0 0 92px #4b0082, 0 0 102px #4b0082, 0 0 151px #4b0082;
 `;
 
 const glow = keyframes`
 from {
-  text-shadow: 0 0 7px #fff, 0 0 10px #fff, 0 0 21px #fff, 0 0 42px #0fa,
-    0 0 82px #0fa, 0 0 92px #0fa, 0 0 102px #0fa, 0 0 151px #0fa;
+  text-shadow: 0 0 7px #fff, 0 0 10px #fff, 0 0 21px #00cc88, 0 0 42px #00cc88,
+    0 0 60px #00cc88, 0 0 50px #00cc88, 0 0 60px #00cc88, 0 0 70px #00cc88;
 }
 to {
     text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e60073, 0 0 40px #e60073,
