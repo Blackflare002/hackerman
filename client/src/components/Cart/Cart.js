@@ -46,17 +46,31 @@ const Cart = () => {
           items.map((item) => (
             <CartItem item={item} handleRemoveFromCart={handleRemoveFromCart} />
           ))}
-        <SubtotalWrapper>
-          <p> Subtotal ({size} items) </p>
-          <p>Total: ${totalCost}</p>
-          <ConfirmBtn onClick={handleConfirmPurchase}>
-            Confirm Purchase
-          </ConfirmBtn>
-        </SubtotalWrapper>
+        {cart.size > 0 && (
+          <SubtotalWrapper>
+            <p> Subtotal ({size} items) </p>
+            <p>Total: ${totalCost}</p>
+            <ConfirmBtn onClick={handleConfirmPurchase}>
+              Confirm Purchase
+            </ConfirmBtn>
+          </SubtotalWrapper>
+        )}
+        {cart.size === 0 && (
+          <EmptyCartBox>
+            <p>Your cart is empty.</p>
+          </EmptyCartBox>
+        )}
       </ul>
     </Wrapper>
   );
 };
+
+const EmptyCartBox = styled.div`
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+`;
+
 const Wrapper = styled.div`
   padding-top: 5%;
   border: 2px solid grey;
@@ -107,7 +121,7 @@ const StyledButton = styled.button`
 `;
 const ConfirmBtn = styled.button`
   margin-left: 10px;
-  background-color: #ffd633;
+  background-color: #bc13fe;
   border: none;
   border-radius: 5px;
   font-weight: bold;
@@ -115,7 +129,7 @@ const ConfirmBtn = styled.button`
   cursor: pointer;
   &:hover,
   :active {
-    background-color: orange;
+    background-color: #9513fe;
     color: white;
   }
   &:active {
