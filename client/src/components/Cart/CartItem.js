@@ -3,30 +3,53 @@ import styled from "styled-components";
 import { AppContext } from "../AppContext";
 
 const CartItem = ({ item, numInCart }) => {
-  const { actions: { addItemToCart, removeItemFromCart } } = useContext(AppContext);
+  const {
+    actions: { addItemToCart, removeItemFromCart },
+  } = useContext(AppContext);
   const [inputValue, setInputValue] = useState(numInCart);
 
   const handleInputChange = (e) => {
+    let newValue;
+    // set minimum number to 1
+    if (e.target.value <= 1) {
+      newValue = 1;
+    }
+
+    // set maximum number to number of items in stock
+    else if (e.target.value > item.numInStock) {
+      newValue = item.numInStock
+    } else {
+      // otherwise, continue with input value
+      newValue = e.target.value;
+    }
+
     // the following logic checks if input incremented or decremented
 
-    // add one more of item to cart if input incremented
-    if (e.target.value > inputValue) {
-      addItemToCart(item);
+    const numChangedBy = newValue - inputValue;
+
+    // add one more of item to cart if input incremented OR set number of items in cart if a number was directly inputed
+    if (numChangedBy > 0) {
+      for (let i = 1; i <= numChangedBy; i++) {
+        addItemToCart(item);
+      }
     }
-    // reduce count of item in cart by 1 if input incremented
-    if (e.target.value < inputValue) {
-      removeItemFromCart(item._id);
+    console.log(!!numChangedBy);
+    // reduce count of item in cart by 1 if input incremented OR set number of items in cart if a number was directly inputed
+    if (numChangedBy < 0) {
+      for (let i = 1; i <= Math.abs(numChangedBy); i++) {
+        removeItemFromCart(item._id);
+      }
     }
-    // set state variable equal to current input value
-    setInputValue(e.target.value);
-  }
+
+    setInputValue(newValue);
+  };
 
   // remove all of this item from the cart
   const handleDeleteItem = () => {
     for (let i = 1; i <= inputValue; i++) {
       removeItemFromCart(item._id);
     }
-  }
+  };
 
   return (
     <WrapperLI>
@@ -36,12 +59,19 @@ const CartItem = ({ item, numInCart }) => {
         <Info>
           <Information>{item.name}</Information>
           {<Information>{item.price}</Information>}
-          <Information><NumInput value={inputValue} onChange={handleInputChange} type="number" min={1} max={item.numInStock} />{/* item.numPurchased */}</Information>
+          <Information>
+            <NumInput
+              value={inputValue}
+              onChange={handleInputChange}
+              type="number"
+              min={1}
+              max={item.numInStock}
+            />
+            {/* item.numPurchased */}
+          </Information>
           <Category>{item.category}</Category>
 
-          <StyledButton onClick={handleDeleteItem}>
-            Delete
-          </StyledButton>
+          <StyledButton onClick={handleDeleteItem}>Delete</StyledButton>
         </Info>
       </ProductInfo1>
       <LineBreak></LineBreak>
@@ -99,5 +129,5 @@ const Info = styled.div`
 `;
 
 const NumInput = styled.input`
-  background-color: var(--veryDarkGrey)
-`
+  background-color: var(--veryDarkGrey);
+`;
