@@ -11,7 +11,7 @@ const initialState = {
     totalCost: 0, // totalCost updates as items array updates
     size: 0, // size updates as items as items array updates
   },
-  completedOrder: null
+  completedOrder: null,
 };
 
 const reducer = (state, action) => {
@@ -48,6 +48,11 @@ const reducer = (state, action) => {
     case "add-item-to-cart": {
       const { cart } = state;
 
+      // find current item inside cart
+      const foundIndex = cart.items.findIndex(
+        (item) => item._id === action.item._id
+      );
+
       //totalCost is stored as a string, needs to be converted to a number for summing
       const updatedTotalCost =
         Number(cart.totalCost) + Number(action.item.price.slice(1)); // add price to total
@@ -60,14 +65,19 @@ const reducer = (state, action) => {
       };
 
       // check if already in cart
-      // increment .numPurchased by 1
-      const foundIndex = updatedCart.items.findIndex(
-        (item) => item._id === action.item._id
-      );
-
       if (foundIndex > -1) {
-        updatedCart.items[foundIndex].numPurchased++; // strict mode caused increment to happen twice inside reducers
-      } else {
+        
+        // before adding to cart, check if number of current item in cart is equal to the item's available stock
+        // if true, do not add to cart and give user visual feedback that the stock number cannot fulfill more than what's currently in the cart
+        if (cart.items[foundIndex].numPurchased === action.item.numInStock) {
+          window.alert(
+            "Sorry, our stock cannot fulfill more than the number of orders of this item currently in your cart."
+            );
+            return state;
+          }
+          // increment .numPurchased by 1
+          updatedCart.items[foundIndex].numPurchased++; // strict mode caused increment to happen twice inside reducers
+        } else {
         // if not already in cart
         // build item object with numPurchased key to keep track of amount added to cart
 
@@ -148,8 +158,8 @@ const reducer = (state, action) => {
     case "save-order": {
       return {
         ...state,
-        completedOrder: action.cart
-      }
+        completedOrder: action.cart,
+      };
     }
 
     case "update-single-item": {
@@ -202,7 +212,9 @@ export const AppContextProvider = ({ children }) => {
     [dispatch]
   );
 
-  const saveOrder = useCallback((cart) => dispatch({ type:"save-order", cart }))
+  const saveOrder = useCallback((cart) =>
+    dispatch({ type: "save-order", cart })
+  );
 
   const setStatusIdle = useCallback(
     () => dispatch({ type: "set-status-idle" }),
@@ -250,7 +262,7 @@ export const AppContextProvider = ({ children }) => {
           clearCart, // clear cart from state and sessionStorage
           getItems, // fetches all items, accepts no args
           removeItemFromCart, // accepts item ID string, removes item from cart.items array
-          restoreCartSession, // gets "forkinator_cart" object from sessionStorage and sets it to cart state
+          restoreCartSession, // gets "forkinators_cart" object from sessionStorage and sets it to cart state
           saveOrder, // accepts whole cart object (only on purchase)
           setStatusError,
           setStatusLoading,
