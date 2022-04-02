@@ -46,6 +46,15 @@ const Item = () => {
     }
     navigate("/cart");
   };
+  
+  // limit input value to between 1 and item.numInStock inclusively
+  const handleInputChange = (e) => {
+    let newValue = e.target.value;
+    if (e.target.value <= 1) newValue = 1;
+    if (e.target.value >= itemData.numInStock) newValue = itemData.numInStock;
+
+    setNumOfItems(newValue);
+  }
 
   const bodyPart = itemData?.body_location;
 
@@ -87,7 +96,7 @@ const Item = () => {
                         max={itemData.numInStock}
                         type="number"
                         value={numOfItems}
-                        onChange={(e) => setNumOfItems(e.target.value)}
+                        onChange={handleInputChange}
                       />
                       <SubtotalLabel>
                         ${Number(numOfItems * Number(itemData.price.slice(1))).toFixed(2)}
