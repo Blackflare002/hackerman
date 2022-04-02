@@ -54,6 +54,7 @@ const CartItem = ({ item, numInCart }) => {
           <Information>{item.name}</Information>
           {<Information>{item.price}</Information>}
           <Information>
+            <Span>Quantity:</Span>
             <NumInput
               value={inputValue}
               onChange={handleInputChange}
@@ -99,6 +100,7 @@ const ProductInfo1 = styled.div`
 const Category = styled.span`
   font-style: italic;
   margin-left: 10px;
+  font-size: 14px;
 `;
 const StyledButton = styled.button`
   background-color: #bc13fe;
@@ -115,6 +117,11 @@ const StyledButton = styled.button`
 
 const Information = styled.span`
   margin-left: 10px;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+`;
+const Span = styled.span`
+  margin-right: 5px;
+  font-size: 14px;
 `;
 const Info = styled.div`
   display: flex;
@@ -124,4 +131,7 @@ const Info = styled.div`
 
 const NumInput = styled.input`
   background-color: var(--veryDarkGrey);
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  border-radius: 5px;
+  max-width: 40px;
 `;
