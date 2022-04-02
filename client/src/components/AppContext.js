@@ -144,7 +144,7 @@ const reducer = (state, action) => {
       const sessionCart = JSON.parse(
         sessionStorage.getItem("forkinators_cart")
       );
-      console.log(sessionCart);
+      // console.log(sessionCart);
 
       const newState = {
         ...state,

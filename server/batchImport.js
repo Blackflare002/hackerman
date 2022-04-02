@@ -20,14 +20,14 @@ const insertCompanies = async () => {
     await client.connect();
     const insertedCompanies = await db.collection("companies").insertMany(companies);
     if (insertedCompanies.value) {
-      console.log("companies inserted");
+      // console.log("companies inserted");
     } else {
-      console.log(insertedCompanies);
-      console.log("companies failed to insert");
+      // console.log(insertedCompanies);
+      // console.log("companies failed to insert");
     }
 
   } catch(err) {
-    console.log(err);
+    // console.log(err);
   }
 
   client.close();
@@ -38,10 +38,10 @@ const insertItems = async () => {
     await client.connect();
     const insertedItems = await db.collection("items").insertMany(items);
     if (insertedItems.value) {
-      console.log("items inserted");
+      // console.log("items inserted");
     } else {
-      console.log(insertedItems);
-      console.log("items failed to insert");
+      // console.log(insertedItems);
+      // console.log("items failed to insert");
     }
 
   } catch(err) {

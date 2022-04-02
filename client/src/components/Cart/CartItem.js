@@ -27,7 +27,7 @@ const CartItem = ({ item, numInCart }) => {
         addItemToCart(item);
       }
     }
-    console.log(!!numChangedBy);
+    // console.log(!!numChangedBy);
     // reduce count of item in cart by 1 if input incremented OR set number of items in cart if a number was directly inputed
     if (numChangedBy < 0) {
       for (let i = 1; i <= Math.abs(numChangedBy); i++) {
