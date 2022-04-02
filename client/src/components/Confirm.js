@@ -47,7 +47,9 @@ const Confirm = () => {
               <Item>
                 <span>.</span>
                 <Dashed></Dashed>
-                <span style={{fontSize: "1rem"}}>Total: ${completedOrder.totalCost}</span>
+                <span style={{ fontSize: "1rem" }}>
+                  Total: ${completedOrder.totalCost}
+                </span>
               </Item>
             </ul>
           </div>
@@ -85,12 +87,20 @@ const Title = styled.span`
 `;
 
 const Wrapper = styled.div`
+  background-color: #131313;
+  border-radius: 12%;
+  border: 10px black solid;
+  padding: 35px;
   margin-top: 150px;
   align-self: center;
   text-shadow: 0 0 7px #0fa, 0 0 10px #0fa, 0 0 21px #0fa, 0 0 42px #0fa,
     0 0 82px #0fa, 0 0 92px #0fa;
+  box-shadow: 0 3px 5px #00ffaa4c, 0 6px 8px #00ffaa36, 0 6px 10px #00ffaa5a;
   * {
     font-family: "Press Start 2P", cursive;
   }
+
+  transform: rotate(8deg) skew(15deg, -8deg);
+
   width: 40%;
 `;
