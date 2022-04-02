@@ -1,6 +1,33 @@
+import { useContext, useState } from "react";
 import styled from "styled-components";
+import { AppContext } from "../AppContext";
 
-const CartItem = ({ item, handleRemoveFromCart }) => {
+const CartItem = ({ item, numInCart }) => {
+  const { actions: { addItemToCart, removeItemFromCart } } = useContext(AppContext);
+  const [inputValue, setInputValue] = useState(numInCart);
+
+  const handleInputChange = (e) => {
+    // the following logic checks if input incremented or decremented
+
+    // add one more of item to cart if input incremented
+    if (e.target.value > inputValue) {
+      addItemToCart(item);
+    }
+    // reduce count of item in cart by 1 if input incremented
+    if (e.target.value < inputValue) {
+      removeItemFromCart(item._id);
+    }
+    // set state variable equal to current input value
+    setInputValue(e.target.value);
+  }
+
+  // remove all of this item from the cart
+  const handleDeleteItem = () => {
+    for (let i = 1; i <= inputValue; i++) {
+      removeItemFromCart(item._id);
+    }
+  }
+
   return (
     <WrapperLI>
       <ProductInfo1>
@@ -8,10 +35,11 @@ const CartItem = ({ item, handleRemoveFromCart }) => {
 
         <Info>
           <Information>{item.name}</Information>
-          <Information>{item.price}</Information>
+          {<Information>{item.price}</Information>}
+          <Information><NumInput value={inputValue} onChange={handleInputChange} type="number" min={1} max={item.numInStock} />{/* item.numPurchased */}</Information>
           <Category>{item.category}</Category>
 
-          <StyledButton onClick={() => handleRemoveFromCart(item._id)}>
+          <StyledButton onClick={handleDeleteItem}>
             Delete
           </StyledButton>
         </Info>
@@ -69,3 +97,7 @@ const Info = styled.div`
   flex-direction: column;
   padding: 10px;
 `;
+
+const NumInput = styled.input`
+  background-color: var(--veryDarkGrey)
+`

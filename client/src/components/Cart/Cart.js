@@ -35,6 +35,11 @@ const Cart = () => {
       });
   };
 
+  const findNumInCart = (itemId) => {
+    const foundIndex = cart.items.findIndex(item => item._id === itemId);
+    return cart.items[foundIndex].numPurchased;
+  }
+
   return (
     <Wrapper>
       <Title>Shopping Cart</Title>
@@ -44,7 +49,7 @@ const Cart = () => {
       <ul>
         {cart &&
           items.map((item) => (
-            <CartItem item={item} handleRemoveFromCart={handleRemoveFromCart} />
+            <CartItem numInCart={findNumInCart(item._id)} item={item} />
           ))}
         {cart.size > 0 && (
           <SubtotalWrapper>
