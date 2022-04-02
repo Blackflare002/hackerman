@@ -9,7 +9,7 @@ const Cart = () => {
   const {
     cart,
     cart: { items, size, totalCost },
-    actions: { clearCart, saveOrder, removeItemFromCart, setStatusError },
+    actions: { clearCart, saveOrder, removeItemFromCart, setStatusError, updateSingleItem },
   } = useContext(AppContext);
 
   const handleRemoveFromCart = (_id) => {
@@ -26,6 +26,20 @@ const Cart = () => {
     })
       .then((res) => res.json())
       .then((data) => {
+        // after updating the DB, fetch DB for updated items
+        const itemIds = cart.items.map((item) => Number(item._id));
+        fetch("/many-items", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ itemIds }),
+        })
+          .then((res) => res.json())
+          .then(({ data }) => {
+            data.forEach(item => updateSingleItem(item));
+          });
+
         saveOrder(cart); // save order to completedOrder state to display in /confirmed route
         clearCart(); // clear cart state on successful purchase
         navigate("/confirmed");
@@ -36,9 +50,9 @@ const Cart = () => {
   };
 
   const findNumInCart = (itemId) => {
-    const foundIndex = cart.items.findIndex(item => item._id === itemId);
+    const foundIndex = cart.items.findIndex((item) => item._id === itemId);
     return cart.items[foundIndex].numPurchased;
-  }
+  };
 
   return (
     <Wrapper>
