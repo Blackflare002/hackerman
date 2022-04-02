@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { AppContext } from "./AppContext";
 import { fontFamily } from "./GlobalStyles";
 
@@ -9,6 +9,7 @@ import background from "../assets/grid.jpg";
 const Item = () => {
   // retrieving item ID from params
   const { id } = useParams();
+  const navigate = useNavigate();
   // using App context
   const {
     actions: { addItemToCart, setStatusError },
@@ -17,6 +18,7 @@ const Item = () => {
   const [itemData, setItemData] = useState();
   // initializing Companies data state
   const [companyData, setCompanyData] = useState();
+  const [numOfItems, setNumOfItems] = useState(1);
 
   useEffect(() => {
     // fetching and updating Item data state
@@ -38,7 +40,11 @@ const Item = () => {
   }, [itemData]); // will fire useEffect when itemData gets updated
 
   const handleAddToCart = () => {
-    addItemToCart(itemData);
+    // add items to cart X times
+    for (let i = 1; i <= numOfItems; i++) {
+      addItemToCart(itemData);
+    }
+    navigate("/cart");
   };
 
   const bodyPart = itemData?.body_location;
@@ -62,7 +68,7 @@ const Item = () => {
                 </BodyLocation>
               </ItemDescription>
               <PurchaseSection>
-                <ItemAvailability>                  
+                <ItemAvailability>
                   {itemData.numInStock < 5 && itemData.numInStock > 1 ? ( // displaying an alert if stock runs lower than 5
                     <Stock>
                       {`Items in Stock: ${itemData.numInStock} (Hurry up!)`}{" "}
@@ -73,6 +79,21 @@ const Item = () => {
                 </ItemAvailability>
                 <ItemPrice>
                   <Price>{itemData.price}</Price>
+                  {itemData.numInStock !== 0 && (
+                    <SubtotalWrapper>
+                      <SubtotalLabel>Subtotal: </SubtotalLabel>
+                      <SubtotalInput
+                        min={1}
+                        max={itemData.numInStock}
+                        type="number"
+                        value={numOfItems}
+                        onChange={(e) => setNumOfItems(e.target.value)}
+                      />
+                      <SubtotalLabel>
+                        ${Number(numOfItems * Number(itemData.price.slice(1))).toFixed(2)}
+                      </SubtotalLabel>
+                    </SubtotalWrapper>
+                  )}
                 </ItemPrice>
               </PurchaseSection>
               <CompanyInfoWrapper>
@@ -81,10 +102,10 @@ const Item = () => {
                   <Country>{companyData.country}</Country>
                 </CompanyInfo>
                 <Cartbutton>
-                  {itemData.numInStock  != 0  ? ( // disabling the button if no item left in stock
-                  <Button onClick={handleAddToCart}>ADD TO CART</Button> 
+                  {itemData.numInStock !== 0 ? ( // disabling the button if no item left in stock
+                    <Button onClick={handleAddToCart}>ADD TO CART</Button>
                   ) : (
-                  <Button disabled={true}>OUT OF STOCK</Button>
+                    <Button disabled={true}>OUT OF STOCK</Button>
                   )}
                 </Cartbutton>
               </CompanyInfoWrapper>
@@ -130,7 +151,6 @@ const ItemWrapper = styled.div`
 `;
 
 const ItemImage = styled.div`
-
   display: flex;
   justify-content: center;
   width: 400px;
@@ -140,7 +160,6 @@ const ItemImage = styled.div`
 `;
 
 const Image = styled.img`
-
   width: 350px;
   height: 350px;
   border-radius: 10px;
@@ -148,14 +167,11 @@ const Image = styled.img`
 `;
 
 const ItemInfo = styled.div`
-
   width: 75%;
   height: 300px;
 `;
 
-
 const ItemDescription = styled.div`
-
   width: 100%;
   display: grid;
   margin-bottom: 50px;
@@ -164,7 +180,6 @@ const ItemDescription = styled.div`
 `;
 
 const ItemName = styled.p`
-
   margin: 0px;
   font-family: ${fontFamily};
   font-size: 32px;
@@ -172,7 +187,6 @@ const ItemName = styled.p`
 `;
 
 const Category = styled.p`
-
   margin: 0px;
   font-family: ${fontFamily};
   font-size: 18px;
@@ -180,20 +194,19 @@ const Category = styled.p`
   color: lightgrey;
 `;
 const BodyLocation = styled.p`
-
   margin: 0px;
   font-family: ${fontFamily};
   color: lightgrey;
 `;
 const Stock = styled.p`
-
   margin: 0px;
   font-family: ${fontFamily};
   font-size: 16px;
   color: lightgrey;
 `;
 const Price = styled.p`
-
+  text-decoration: underline;
+  text-underline-offset: 15px;
   margin: 0px;
   font-family: ${fontFamily};
   font-size: 32px;
@@ -202,33 +215,33 @@ const Price = styled.p`
 `;
 
 const PurchaseSection = styled.div`
-
   display: grid;
   grid-template-columns: auto auto;
   align-items: center;
   justify-content: flex-start;
   gap: 190px;
-  margin-bottom: 50px;
+  margin-bottom: 30px;
 `;
 
 const ItemAvailability = styled.div`
-
   width: 150px;
   color: lightgrey;
 `;
 
-const ItemPrice = styled.div``;
+const ItemPrice = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+`;
 
 const Cartbutton = styled.div``;
 
 const CompanyInfoWrapper = styled.div`
-
   display: flex;
   align-items: center;
   gap: 150px;
 `;
 const CompanyInfo = styled.a`
-
   text-align: center;
   text-decoration: none;
   color: whitesmoke;
@@ -240,20 +253,17 @@ const CompanyInfo = styled.a`
   border-radius: 10px; ;
 `;
 const CompanyName = styled.p`
-
   margin: 0px;
   font-family: ${fontFamily};
   font-size: 20px;
 `;
 const Country = styled.p`
-
   margin: 0px;
   font-family: ${fontFamily};
   font-style: italic;
 `;
 
 const Button = styled.button`
-
   width: 150px;
   height: 50px;
   font-size: 16px;
@@ -286,4 +296,27 @@ const Button = styled.button`
     box-shadow: 0 0 7px red, 0 0 10px red, 0 0 21px red, 0 0 42px red,
       0 0 82px red, 0 0 92px red, 0 0 102px red, 0 0 151px red;
   }
+`;
+
+const Subtotal = styled.div``;
+
+const SubtotalInput = styled.input`
+  background-color: var(--realDarkGray);
+  font-size: 1.15rem;
+  font-weight: bold;
+  border: solid white 2px;
+  box-shadow: 0 0 7px #fff, 0 0 10px #fff, 0 0 21px #fff;
+  text-align: center;
+  height: 40px;
+  width: 50px;
+`;
+
+const SubtotalLabel = styled.div``;
+
+const SubtotalWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 200px;
+  margin-top: 30px;
 `;

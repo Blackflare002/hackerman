@@ -26,7 +26,7 @@ const Header = () => {
         <div>
           <StyledLink to={`/cart`}>
             <CartBox>
-              <span>{size}</span>
+              <CartSize>{size}</CartSize>
               <RiShoppingCartLine />
               <span>Cart</span>
             </CartBox>
@@ -72,6 +72,10 @@ const CartBox = styled.div`
     transform: translateY(4px);
   }
 `;
+
+const CartSize = styled.span`
+  font-family: "RevampedFont";
+`
 
 const StyledLink = styled(Link)`
   text-decoration: none;
