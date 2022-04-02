@@ -72,6 +72,34 @@ const getItems = async (req, res) => {
   }
   client.close();
 };
+
+// get multiple items by ID
+const getManyItems = async (req, res) => {
+  const client = new MongoClient(MONGO_URI, options);
+  const { itemIds } = req.body;
+
+  // build array of objects { _id: <id> } for $or query
+  const itemIdsQuery = itemIds.map((_id) => ({ _id: Number(_id) }));
+
+  const query = {
+    $or: itemIdsQuery,
+  };
+  // console.log(itemIdsQuery);
+  try {
+    await client.connect();
+    const db = client.db("ecommerce_db");
+
+    const updatedItems = await db.collection("items").find(query).toArray();
+    if (updatedItems) {
+      res.status(200).json({ status: 200, data: updatedItems });
+    } else {
+      res.status(404).json({ status: 404, message: "Item(s) not found." });
+    }
+  } catch (err) {
+    res.status(500).json({ status: 500, message: err.stack });
+  }
+};
+
 // this retrieves a single item based off its _Id
 //same principle as what was done with compagnies/:id but this one is for items.
 const getSingleItem = async (req, res) => {
@@ -169,6 +197,7 @@ module.exports = {
   getCompanies,
   getACompaniesId,
   getItems,
+  getManyItems,
   getSingleItem,
   updateItemStock,
 };
