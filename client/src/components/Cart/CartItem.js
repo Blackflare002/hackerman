@@ -9,22 +9,16 @@ const CartItem = ({ item, numInCart }) => {
   const [inputValue, setInputValue] = useState(numInCart);
 
   const handleInputChange = (e) => {
-    let newValue;
+    let newValue = e.target.value;
     // set minimum number to 1
-    if (e.target.value <= 1) {
-      newValue = 1;
-    }
+    if (e.target.value <= 1) newValue = 1;
 
     // set maximum number to number of items in stock
-    else if (e.target.value > item.numInStock) {
-      newValue = item.numInStock
-    } else {
-      // otherwise, continue with input value
-      newValue = e.target.value;
-    }
+    if (e.target.value > item.numInStock) newValue = item.numInStock;
+
+    // otherwise, continue with given input value
 
     // the following logic checks if input incremented or decremented
-
     const numChangedBy = newValue - inputValue;
 
     // add one more of item to cart if input incremented OR set number of items in cart if a number was directly inputed
