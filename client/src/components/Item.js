@@ -99,7 +99,9 @@ const Item = () => {
                         onChange={handleInputChange}
                       />
                       <SubtotalLabel>
-                        ${Number(numOfItems * Number(itemData.price.slice(1))).toFixed(2)}
+                        <SubtotalPrice>
+                          ${Number(numOfItems * Number(itemData.price.slice(1))).toFixed(2)}
+                        </SubtotalPrice>
                       </SubtotalLabel>
                     </SubtotalWrapper>
                   )}
@@ -182,9 +184,10 @@ const ItemInfo = styled.div`
 
 const ItemDescription = styled.div`
   width: 100%;
-  display: grid;
-  margin-bottom: 50px;
-  align-items: center;
+  height: 60%;  
+  display: flex;
+  flex-direction: column;  
+  align-items: flex-start;
   gap: 20px;
 `;
 
@@ -203,44 +206,49 @@ const Category = styled.p`
   color: lightgrey;
 `;
 const BodyLocation = styled.p`
-  margin: 0px;
+  margin: 0px;  
   font-family: ${fontFamily};
   color: lightgrey;
 `;
 const Stock = styled.p`
   margin: 0px;
   font-family: ${fontFamily};
-  font-size: 16px;
+  font-size: 18px;
   color: lightgrey;
+  
 `;
 const Price = styled.p`
   text-decoration: underline;
   text-underline-offset: 15px;
   margin: 0px;
   font-family: ${fontFamily};
-  font-size: 32px;
+  font-size: 24px;
   text-shadow: 0 0 7px #fff, 0 0 10px #fff, 0 0 21px #fff, 0 0 42px #0fa,
     0 0 82px #0fa, 0 0 92px #0fa, 0 0 102px #0fa, 0 0 151px #0fa;
 `;
 
-const PurchaseSection = styled.div`
-  display: grid;
-  grid-template-columns: auto auto;
+const PurchaseSection = styled.div`  
+  height: 80px;
+  display: flex;
+  flex-direction: row;
   align-items: center;
   justify-content: flex-start;
-  gap: 190px;
-  margin-bottom: 30px;
+  gap: 20px;  
 `;
 
 const ItemAvailability = styled.div`
   width: 150px;
+  height: 100px;
   color: lightgrey;
+  display: flex;
+  align-items: center;
 `;
 
 const ItemPrice = styled.div`
   display: flex;
-  flex-direction: column;
-  align-items: flex-end;
+  flex-direction: row;
+  align-items: center;  
+  gap: 30px;
 `;
 
 const Cartbutton = styled.div``;
@@ -248,7 +256,10 @@ const Cartbutton = styled.div``;
 const CompanyInfoWrapper = styled.div`
   display: flex;
   align-items: center;
-  gap: 150px;
+  justify-content: flex-start;
+  width: 100%;
+  height: 100px;
+  gap: 170px;
 `;
 const CompanyInfo = styled.a`
   text-align: center;
@@ -307,25 +318,42 @@ const Button = styled.button`
   }
 `;
 
-const Subtotal = styled.div``;
+
 
 const SubtotalInput = styled.input`
-  background-color: var(--realDarkGray);
+  background-color: var(--realDarkGray);  
   font-size: 1.15rem;
   font-weight: bold;
   border: solid white 2px;
+  border-radius: 10px;
   box-shadow: 0 0 7px #fff, 0 0 10px #fff, 0 0 21px #fff;
-  text-align: center;
+  text-align: center;  
   height: 40px;
   width: 50px;
 `;
 
-const SubtotalLabel = styled.div``;
+const SubtotalLabel = styled.div`
+  display: flex;
+  align-items: center;
+  font-size: 18px;
+  height: 100px;
+`;
+
+const SubtotalPrice = styled.p`
+  font-size: 24px;
+  text-decoration: underline;
+  text-underline-offset: 15px;  
+  margin: 0px;
+  font-family: ${fontFamily};  
+  text-shadow: 0 0 7px #fff, 0 0 10px #fff, 0 0 21px #fff, 0 0 42px #0fa,
+    0 0 82px #0fa, 0 0 92px #0fa, 0 0 102px #0fa, 0 0 151px #0fa;
+`;
+
 
 const SubtotalWrapper = styled.div`
-  display: flex;
+  display: flex;  
+  gap: 25px;
   justify-content: space-between;
   align-items: center;
-  width: 200px;
-  margin-top: 30px;
+  width: 200px;  
 `;
