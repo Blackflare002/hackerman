@@ -7,6 +7,7 @@ const PORT = 4000;
 const {
   getCompanies,
   getItems,
+  getManyItems,
   getSingleItem,
   getACompaniesId,
   updateItemStock,
@@ -39,6 +40,8 @@ express()
   .get("/items", getItems)
   //this endpoint retrieves items by their _id
   .get("/items/:_id", getSingleItem)
+  // retrieve many items by id
+  .post("/many-items", getManyItems)
   //this endpoint is to update the value of the stock when the stock itself is not 0
   .patch("/cart/update-stock", updateItemStock)
 
