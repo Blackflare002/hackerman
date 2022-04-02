@@ -66,18 +66,17 @@ const reducer = (state, action) => {
 
       // check if already in cart
       if (foundIndex > -1) {
-        
         // before adding to cart, check if number of current item in cart is equal to the item's available stock
         // if true, do not add to cart and give user visual feedback that the stock number cannot fulfill more than what's currently in the cart
         if (cart.items[foundIndex].numPurchased === action.item.numInStock) {
           window.alert(
             "Sorry, our stock cannot fulfill more than the number of orders of this item currently in your cart."
-            );
-            return state;
-          }
-          // increment .numPurchased by 1
-          updatedCart.items[foundIndex].numPurchased++; // strict mode caused increment to happen twice inside reducers
-        } else {
+          );
+          return state;
+        }
+        // increment .numPurchased by 1
+        updatedCart.items[foundIndex].numPurchased++; // strict mode caused increment to happen twice inside reducers
+      } else {
         // if not already in cart
         // build item object with numPurchased key to keep track of amount added to cart
 
@@ -99,7 +98,11 @@ const reducer = (state, action) => {
 
       return {
         ...state,
-        cart: initialState.cart,
+        cart: {
+          items: [],
+          totalCost: 0, // totalCost updates as items array updates
+          size: 0, // size updates as items as items array updates
+        },
       };
     }
 
