@@ -54,7 +54,7 @@ const CartBox = styled.div`
   display: flex;  
   font-size: 18px;
   font-family: "TronFont";  
-  border: solid 1px #0fa;
+  border: solid 1px #0fa;  
   border-radius: 15px;
   box-shadow: 0 2px 5px whitesmoke;
   width: 150px;
