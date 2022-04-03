@@ -110,13 +110,13 @@ const Item = () => {
               <CompanyInfoWrapper>
                 <CompanyInfo href={companyData.url}>
                   <CompanyName>{companyData.name}</CompanyName>
-                  <Country>{companyData.country}</Country>
+                  <Country>{`(${companyData.country})`}</Country>                  
                 </CompanyInfo>
                 <Cartbutton>
                   {itemData.numInStock !== 0 ? ( // disabling the button if no item left in stock
-                    <Button onClick={handleAddToCart}>ADD TO CART</Button>
+                    <Button onClick={handleAddToCart}>Add To Cart</Button>
                   ) : (
-                    <Button disabled={true}>OUT OF STOCK</Button>
+                    <Button disabled={true}>Sold Out</Button>
                   )}
                 </Cartbutton>
               </CompanyInfoWrapper>
@@ -153,7 +153,7 @@ const ItemWrapper = styled.div`
   display: flex;
   gap: 30px;
   align-items: center;
-  background-color: var(--realDarkGrey);
+  background-color: black;
   border-radius: 10px;
   padding: 30px;
   color: #fff;
@@ -259,24 +259,31 @@ const CompanyInfoWrapper = styled.div`
   justify-content: flex-start;
   width: 100%;
   height: 100px;
-  gap: 170px;
+  gap: 140px;
 `;
+
 const CompanyInfo = styled.a`
   text-align: center;
   text-decoration: none;
-  color: whitesmoke;
-  width: 150px;
+  background-color: var(--realDarkGrey);
+  color: whitesmoke;  
   min-width: 150px;
   border: solid white 1px;
   padding: 10px;
   box-shadow: 0 3px 10px whitesmoke;
-  border-radius: 10px; ;
+  border-radius: 10px;
+  :hover {    
+    transition: box-shadow 0.5s ease-in-out;    
+    box-shadow: 0 0 7px #fff, 0 0 10px #fff, 0 0 21px #0fa, 0 0 42px #0fa;    
+  }
 `;
+
 const CompanyName = styled.p`
   margin: 0px;
   font-family: ${fontFamily};
   font-size: 20px;
 `;
+
 const Country = styled.p`
   margin: 0px;
   font-family: ${fontFamily};
@@ -284,41 +291,38 @@ const Country = styled.p`
 `;
 
 const Button = styled.button`
-  width: 150px;
-  height: 50px;
-  font-size: 16px;
-  font-family: ${fontFamily};
+  width: 200px;
+  height: 60px;
+  line-height: 20px;
+  border: 0px;  
   border-radius: 10px;
-  color: #bc13fe;
-  box-shadow: 0 0 0.2rem #fff, 0 0 0.2rem #fff, 0 0 2rem #bc13fe,
-    0 0 0.8rem #bc13fe, 0 0 2.8rem #bc13fe, inset 0 0 1.3rem #bc13fe;
-  text-shadow: 0 0 7px #fff, 0 0 10px #fff, 0 0 21px #fff, 0 0 42px #0fa,
-    0 0 82px #0fa, 0 0 92px #0fa, 0 0 102px #0fa, 0 0 151px #0fa;
-
+  background: transparent;
+  font-family: "TronFont";
+  font-size: 24px;
+  text-shadow: 0 0 2px #0fa, 0 0 3px #0fa, 0 0 5px #0fa, 0 0 5px #0fa,
+      0 0 10px #0fa, 0 0 12px #0fa, 0 0 12px #0fa, 0 0 30px #0fa;
+  
   :hover {
     cursor: pointer;
-    color: #0fa;
-    transition: box-shadow 0.5s ease-in-out;
-    box-shadow: 0 0 7px #fff, 0 0 10px #fff, 0 0 21px #fff, 0 0 42px #0fa,
-      0 0 82px #0fa, 0 0 92px #0fa, 0 0 102px #0fa, 0 0 151px #0fa;
-  }
+    color: whitesmoke;
+    transition: text-shadow 0.1s ease-in-out;
+    transition: box-shadow 0.1s ease-in-out;
+    text-shadow: 0 0 4px whitesmoke, 0 0 6px whitesmoke, 0 0 10px whitesmoke, 0 0 10px #0fa,
+      0 0 20px #0fa, 0 0 24px #0fa, 0 0 24px #0fa, 0 0 60px #0fa;  }
   :active {
     transform: translateY(4px);
   }
   :disabled {
-    cursor: pointer;
-    color: orange;
-    background-color: black;
-    border: solid orange 1px;
-    transition: box-shadow 0.5s ease-in-out;
-    text-shadow: 0 0 7px red, 0 0 10px red, 0 0 21px red, 0 0 42px red,
-      0 0 82px red, 0 0 92px red, 0 0 102px red, 0 0 151px red;
-    box-shadow: 0 0 7px red, 0 0 10px red, 0 0 21px red, 0 0 42px red,
-      0 0 82px red, 0 0 92px red, 0 0 102px red, 0 0 151px red;
-  }
+    color: #ff5b9d;
+    font-family: "RevampedFont";
+    font-size: 32px;
+    text-decoration: underline;
+    text-underline-offset: 5px;    
+    text-shadow: 0 0 4px #ff0066, 0 0 6px #ff0066, 0 0 10px #ff0066, 0 0 10px #ff0066,
+      0 0 20px #ff0066, 0 0 24px #ff0066, 0 0 24px #ff0066, 0 0 60px #ff0066;      
+    padding: 0;
+    }
 `;
-
-
 
 const SubtotalInput = styled.input`
   background-color: var(--realDarkGray);  
