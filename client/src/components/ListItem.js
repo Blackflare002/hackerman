@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { AppContext } from "./AppContext";
 
 const ListItem = ({ item }) => {
@@ -29,8 +29,8 @@ const ListItem = ({ item }) => {
                     ? item.name
                     : item.name.slice(0, 65) + "..."}
                 </StyledItemName>
-                </div>
-                {item.numInStock === 0 && <OOSRibbon>Sold out</OOSRibbon>}
+              </div>
+              {item.numInStock === 0 && <OOSRibbon>Sold out</OOSRibbon>}
               <PriceAndBtn>
                 <StyledItemPrice>{item.price}</StyledItemPrice>
                 {showButton && (
@@ -80,7 +80,7 @@ const PriceAndBtn = styled.div`
   flex-direction: column; */
   justify-content: space-between;
   height: 70px;
-`
+`;
 
 const StyledButton = styled.button`
   background-color: black;
@@ -124,6 +124,15 @@ const ItemInnerBox = styled.div`
   }
 `;
 
+const glow = keyframes`
+from {
+  box-shadow: none;
+}
+to {
+  box-shadow: 0 0 7px #fff, 0 0 10px #fff, 0 0 21px #0fa, 0 0 42px #0fa;
+}
+`;
+
 const ItemContainer = styled.div`
   display: flex;
   align-items: center;
@@ -135,13 +144,16 @@ const ItemContainer = styled.div`
   background-color: var(--realDarkGrey);
   border-radius: 10px;
   /* transition: all 1s ease-in-out; */
+  animation: ${glow} 1s ease-in-out reverse forwards;
 
   :hover {
     /* height: 300px; */
-    transition: box-shadow 0.5s ease-in-out;
     /* transform: scale(1.1); */
-    box-shadow: 0 0 7px #fff, 0 0 10px #fff, 0 0 21px #0fa, 0 0 42px #0fa;
     /* ,0 0 82px #0fa, 0 0 92px #0fa, 0 0 102px #0fa, 0 0 151px #0fa; */
+    /*  */
+    /* transition: box-shadow 0.5s ease-in-out; */
+    /* box-shadow: 0 0 7px #fff, 0 0 10px #fff, 0 0 21px #0fa, 0 0 42px #0fa; */
+    animation: ${glow} 1s ease-in-out forwards;
   }
 `;
 
