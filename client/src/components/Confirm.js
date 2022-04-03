@@ -95,7 +95,7 @@ const Wrapper = styled.div`
   align-self: center;
   text-shadow: 0 0 7px #0fa, 0 0 10px #0fa, 0 0 21px #0fa, 0 0 42px #0fa,
     0 0 82px #0fa, 0 0 92px #0fa;
-  box-shadow: 0 3px 5px #00ffaa4c, 0 6px 8px #00ffaa36, 0 6px 10px #00ffaa5a;
+  box-shadow: -5px 5px 5px #00ffaa4c, -5px 6px 8px #00ffaa36, -2px 3px 10px #00ffaa5a;
   * {
     font-family: "Press Start 2P", cursive;
   }
