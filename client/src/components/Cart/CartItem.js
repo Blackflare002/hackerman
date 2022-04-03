@@ -52,6 +52,14 @@ const CartItem = ({ item, numInCart }) => {
 
         <Info>
           <Information>{item.name}</Information>
+          {item.numInStock < 5 ? (
+            <InformationStock>
+              <span>stock: </span>
+              {item.numInStock}
+            </InformationStock>
+          ) : (
+            <Information>In stock</Information>
+          )}
           {<Information>{item.price}</Information>}
           <Information>
             <Span>Quantity:</Span>
@@ -118,6 +126,10 @@ const StyledButton = styled.button`
 const Information = styled.span`
   margin-left: 10px;
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+`;
+const InformationStock = styled.span`
+  color: red;
+  margin-left: 10px;
 `;
 const Span = styled.span`
   margin-right: 5px;
