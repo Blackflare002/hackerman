@@ -52,7 +52,7 @@ const CartItem = ({ item, numInCart }) => {
 
         <Info>
           <Information>{item.name}</Information>
-          {item.numInStock < 5 ? (
+          {item.numInStock - numInCart < 5 ? (
             <InformationStock>
               <span>stock: </span>
               {item.numInStock}
