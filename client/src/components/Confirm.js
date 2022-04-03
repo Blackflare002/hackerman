@@ -62,7 +62,7 @@ const Confirm = () => {
 export default Confirm;
 
 const Dashed = styled.div`
-  margin: 0 5px;
+  margin: 0 10px;
   border-bottom: dashed #a6ffe1 2px;
   box-shadow: 1px 1px 7px #0fa, 0 0 10px #0fa, 0 0 21px #0fa, 0 0 42px #0fa,
     0 0 82px #0fa, 0 0 92px #0fa;
@@ -76,8 +76,8 @@ const Item = styled.li`
   display: flex;
   font-size: 0.6rem;
   justify-content: space-between;
-  line-height: 20px;
-  margin-bottom: 3px;
+  line-height: 16px;
+  margin-bottom: 16px;
   width: 100%;
 `;
 
