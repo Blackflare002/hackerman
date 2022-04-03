@@ -21,26 +21,32 @@ const ListItem = ({ item }) => {
       <StyledLi key={Math.floor(Math.random() * 8008135)}>
         <ItemContainer>
           <StyledLink to={`/item/${item._id}`}>
-          <ItemInnerBox>
-          <div>
-          <StyledImg src={item.imageSrc} />
-          <StyledItemName>{item.name.length < 50 ? item.name : item.name.slice(0, 50) + "..."}</StyledItemName>
-          <StyledItemPrice>{item.price}</StyledItemPrice>
-          {item.numInStock === 0 && <OOSRibbon>Sold out</OOSRibbon>}
-          </div>
-              {showButton  &&
-                <StyledButton
-                  onClick={(ev) => {
-                    ev.preventDefault();
-                    ev.stopPropagation();
-                    addItemToCart(item);
-                  }}
-                  disabled={item.numInStock === 0}
-                  isInStock={item.numInStock > 0}
-                >
-                  {item.numInStock > 0 ? "Add to Cart" : "Sold out"}
-                </StyledButton>
-              }
+            <ItemInnerBox>
+              <div>
+                <StyledImg src={item.imageSrc} />
+                <StyledItemName>
+                  {item.name.length < 65
+                    ? item.name
+                    : item.name.slice(0, 65) + "..."}
+                </StyledItemName>
+                </div>
+                {item.numInStock === 0 && <OOSRibbon>Sold out</OOSRibbon>}
+              <PriceAndBtn>
+                <StyledItemPrice>{item.price}</StyledItemPrice>
+                {showButton && (
+                  <StyledButton
+                    onClick={(ev) => {
+                      ev.preventDefault();
+                      ev.stopPropagation();
+                      addItemToCart(item);
+                    }}
+                    disabled={item.numInStock === 0}
+                    isInStock={item.numInStock > 0}
+                  >
+                    {item.numInStock > 0 ? "Add to Cart" : "Sold out"}
+                  </StyledButton>
+                )}
+              </PriceAndBtn>
             </ItemInnerBox>
           </StyledLink>
         </ItemContainer>
@@ -56,18 +62,25 @@ const Wrapper = styled.div`
 const OOSRibbon = styled.div`
   color: #ff5b9d;
   font-family: "RevampedFont";
-  font-size: 1.1rem;
+  font-size: 1.5rem;
   position: relative;
   text-decoration: underline;
   text-underline-offset: 5px;
   text-shadow: 0 0 7px #ff0066, 0 0 3px #ff0066, 0 0 12px #ff0066;
-  top: -19%;
+  top: 15%;
   left: 1%;
   width: fit-content;
   transform: rotate(-6deg);
   margin: 0;
   padding: 0;
 `;
+
+const PriceAndBtn = styled.div`
+  /* display: flex; // already inheriting flex properties
+  flex-direction: column; */
+  justify-content: space-between;
+  height: 70px;
+`
 
 const StyledButton = styled.button`
   background-color: black;
@@ -108,9 +121,6 @@ const ItemInnerBox = styled.div`
     align-items: center;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
-    gap: 25px;
-
   }
 `;
 
@@ -136,8 +146,9 @@ const ItemContainer = styled.div`
 `;
 
 const StyledImg = styled.img`
-  height: 80px;
   border-radius: 25px;
+  height: 80px;
+  margin-bottom: 20px;
 `;
 
 const StyledLink = styled(Link)`
