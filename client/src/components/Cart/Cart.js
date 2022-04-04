@@ -98,6 +98,7 @@ const EmptyCartBox = styled.div`
 `;
 
 const Wrapper = styled.div`
+  padding: 30px;
   padding-top: 5%;
   border: 2px solid grey;
   border-radius: 9px;
@@ -109,8 +110,8 @@ const Wrapper = styled.div`
 `;
 const Title = styled.h1`
   font-size: 40px;
+  text-align: center;
   margin-top: 20px;
-  margin-left: 10px;
 `;
 const LineBreak = styled.div`
   border-bottom: 1px solid grey;
