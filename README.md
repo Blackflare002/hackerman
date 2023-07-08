@@ -1,69 +1,11 @@
-# Wearables E-Commerce Project
+# Hackerman - E-Commerce Website
 
-You will make use of _everything_ that you have learned thus far in the bootcamp to build an e-commerce app that will showcase all of the provided _wearables_ items.
+Concordia Web Dev Bootcamp group project. Cyberpunk-themed e-commerce website. Data provided by Concordia, concept, functionality and styling all done by our team. Uses React, Node, Express and MongoDB.
 
-The stack is React.Js, Node.Js, and styled-components.
+Team: Shane Phillips, Eric Chan, Olivier Nimal, Eddy Lachapelle.
 
-Your node server should be RESTful and follow REST principles, at least to the extent we learned during the bootcamp.
-
----
-
-**✋ You CANNOT use any external UI libraries, including, but not limited to, Material UI, Bootstrap to style your project!**
-
----
-
-## Getting Started
-
-<img src="./server/assets/software-dev-path.jpg" style="width: 100%;" />
-
-You have your assignment and your team. What should you do first? This will vary for every team, and even every team member.
-
-**The important thing is to NOT just jump in and start coding!**
-
-There probably shouldn't be any coding until very near the end of the first day.
-
-## Meet your Product Manager!
-
-Each team has been assigned a product manager. This person is in charge of answering questions, guiding you and basically preventing everything from falling apart!
-
-This person should be present for some of your team meetings, but not all. PMs are super busy people and have multiple projects/people to manage. 😉
-
-## Planning
-
-1. You will break into groups (with your assigned PM.)
-2. Your PM will answer any initial questions, and give you more information, as required.
-3. Breakout into a separate meeting with just your team. _Your PM will bounce from team to team to make sure you're on track._
-4. Time to use the [Kickoff Meeting Agenda](__documentation/KICKOFF_MEETING_AGENDA.md)
-
-### First team meeting
-
-It could also be a good/fun idea to give yourselves an original team name. :)
-
-Your first team meeting should start with the [Kickoff Meeting Agenda](__documentation/KICKOFF_MEETING_AGENDa.md).
-
-[Successful Software Project Delivery in 10 Steps](https://www.appnovation.com/blog/successful-software-project-delivery-10-steps).
-
-💡 How a project starts is indicative of how it will end.
-
-## Teamwork
-
-The most important aspect of this project is the ability to work in a team. No matter your contribution to the project, you should understand the **FULL** codebase. This will require that you
-
-- **Review** each other's code.
-- **Ask** questions when you don't understand.
-- **Comment** your code extensively. _Always go for clarity over brevity._
-- **Communicate** with your team.
-
-## Updating GitHub
-
-See the [Step by Step Document](https://docs.google.com/document/d/1Txc02kMSnTjyOWFj3HDXc5y5tSurt3AFJGpXZKxvX6A/edit?usp=sharing)
-
-## Project Guidelines
-
-You can see the guidelines [here](./__documentation/PROJECT.md)
-
-## Presentation
-
-Your team will have to present the final product on the final day in order to get a passing grade. Who will draw the short straw?
-
-- The presentation shouldn't be more than 5 mintues long.
+![Screenshot (6)](https://user-images.githubusercontent.com/60205439/165153833-817a6da1-1372-41e3-acb5-9b8008b80e43.png)
+![Screenshot (7)](https://user-images.githubusercontent.com/60205439/165153838-0a567f13-be20-4e86-a3cf-03fc63249807.png)
+![Screenshot (8)](https://user-images.githubusercontent.com/60205439/165153851-77775593-de68-4d9e-a752-bad35d372d5d.png)
+![Screenshot (9)](https://user-images.githubusercontent.com/60205439/165153853-85d43336-79f3-49cd-8990-a078276a051e.png)
+![Screenshot (10)](https://user-images.githubusercontent.com/60205439/165153857-74f0c731-f7e5-4698-8073-18253c56c962.png)
