@@ -83,7 +83,6 @@ const Item = styled.li`
 
 const Title = styled.span`
   font-size: 1rem;
-  /* margin-bottom: 5px; */
 `;
 
 const Wrapper = styled.div`

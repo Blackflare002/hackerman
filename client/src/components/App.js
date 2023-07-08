@@ -36,6 +36,5 @@ const HeaderWrapper = styled.div`
 `
 
 const RoutesWrapper = styled(Routes)`
-
   flex: 1;
 `

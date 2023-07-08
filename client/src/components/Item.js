@@ -2,7 +2,6 @@ import { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { AppContext } from "./AppContext";
 import { fontFamily } from "./GlobalStyles";
-
 import styled from "styled-components";
 import background from "../assets/grid.jpg";
 
@@ -112,13 +111,13 @@ const Item = () => {
                   <CompanyName>{companyData.name}</CompanyName>
                   <Country>{`(${companyData.country})`}</Country>                  
                 </CompanyInfo>
-                <Cartbutton>
+                {/* <Cartbutton> */}
                   {itemData.numInStock !== 0 ? ( // disabling the button if no item left in stock
                     <Button onClick={handleAddToCart}>Add To Cart</Button>
                   ) : (
                     <Button disabled={true}>Sold Out</Button>
                   )}
-                </Cartbutton>
+                {/* </Cartbutton> */}
               </CompanyInfoWrapper>
             </ItemInfo>
           </ItemWrapper>
@@ -250,8 +249,6 @@ const ItemPrice = styled.div`
   align-items: center;  
   gap: 30px;
 `;
-
-const Cartbutton = styled.div``;
 
 const CompanyInfoWrapper = styled.div`
   display: flex;
